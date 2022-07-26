@@ -5,7 +5,7 @@ import time
 import torch
 from typing import Union, Callable, Any
 
-from .worker import Worker, ByzantineWorker
+from .worker import Worker, ByzantineWorker, repeat_model
 from .server import TorchServer
 from .utils import vectorize_model, unstack_vectorized_model
 
@@ -407,7 +407,9 @@ class DecentralizedTrainer(_SimulatorBase):
         worker.set_gradient(g)
         worker.apply_gradient()
 
-        worker.running["flattened_model"] = vectorize_model(worker.model)
+        #worker.running["flattened_model"] = vectorize_model(worker.model)
+        # MODELS_FIX
+        worker.running["flattened_models"] = repeat_model(worker, vectorize_model(worker.model))
         worker.running["aggregated_model"] = None
 
     def _load_state_dict(self, worker):
@@ -427,9 +429,9 @@ class DecentralizedTrainer(_SimulatorBase):
         Here is how it works:
         - Each good worker compute gradients on model (x_t)
         - Each worker applies gradients to models and get (x_{t+1/2})
-        - Each worker flatten x_{t+1/2} and save to `flattened_model`
+        - Each worker flatten x_{t+1/2} and save to `flattened_models`
             * Each Byzantine worker creates its model based on other good workers.
-        - Each worker aggregates `flattened_model` of the neighbors and save to `aggregated_model`
+        - Each worker aggregates `flattened_models` of the neighbors and save to `aggregated_model`
         - Update model from `aggregated_model`
         """
         # Aggregate and save models
@@ -440,10 +442,14 @@ class DecentralizedTrainer(_SimulatorBase):
 
             inputs = []
             for w in worker.running["neighbor_workers"]:
-                inputs.append(w.running["flattened_model"])
+                #inputs.append(w.running["flattened_model"])
+                # MODELS_FIX
+                inputs.append(w.running["flattened_models"][worker.index])
 
             worker.running["aggregated_model"] = agg(
-                worker.running["flattened_model"],
+                #worker.running["flattened_model"],
+                # MODELS_FIX
+                worker.running["flattened_models"][worker.index],
                 inputs,
             )
 
@@ -570,7 +576,6 @@ class DecentralizedTrainer(_SimulatorBase):
         # Output to file
         self.json_logger.info(r)
 
-
 class DummyDecentralizedTrainer(DecentralizedTrainer):
     """Worker do not apply gradient any more. Only rely on aggregator for progress.
 
@@ -588,7 +593,9 @@ class DummyDecentralizedTrainer(DecentralizedTrainer):
         # worker.set_gradient(g)
         # worker.apply_gradient()
 
-        worker.running["flattened_model"] = vectorize_model(worker.model)
+        #worker.running["flattened_model"] = vectorize_model(worker.model)
+        # MODELS_FIX
+        worker.running["flattened_models"] = repeat_model(worker, vectorize_model(worker.model))
         worker.running["aggregated_model"] = None
 
 
@@ -604,9 +611,9 @@ class MultiRoundsDecentralizedTrainer(DecentralizedTrainer):
         Here is how it works:
         - Each good worker compute gradients on model (x_t)
         - Each worker applies gradients to models and get (x_{t+1/2})
-        - Each worker flatten x_{t+1/2} and save to `flattened_model`
+        - Each worker flatten x_{t+1/2} and save to `flattened_models`
             * Each Byzantine worker creates its model based on other good workers.
-        - Each worker aggregates `flattened_model` of the neighbors and save to `aggregated_model`
+        - Each worker aggregates `flattened_models` of the neighbors and save to `aggregated_model`
         - Update model from `aggregated_model`
         """
         # Aggregate and save models
@@ -617,20 +624,26 @@ class MultiRoundsDecentralizedTrainer(DecentralizedTrainer):
 
             inputs = []
             for w in worker.running["neighbor_workers"]:
-                inputs.append(w.running["flattened_model"])
-
+                #inputs.append(w.running["flattened_model"])
+                # MODELS_FIX 
+                inputs.append(w.running["flattened_models"][worker.index])
+            
+            
             worker.running["aggregated_model"] = agg(
-                worker.running["flattened_model"],
+                #worker.running["flattened_model"],
+                # MODELS_FIX
+                worker.running["flattened_models"][worker.index],
                 inputs,
             )
-
-        def _update_flattened_model(worker):
-            worker.running["flattened_model"] = worker.running[
-                "aggregated_model"
-            ].clone()
+            
+ 
+        def _update_flattened_models(worker):
+            #worker.running["flattened_model"] = worker.running["aggregated_model"].clone()
+            #MODELS_FIX
+            worker.running["flattened_models"] = repeat_model(worker, worker.running["aggregated_model"].clone())
 
         for _ in range(self.comm_rounds):
             self.decall(_aggregate_models)
-            self.decall(_update_flattened_model)
+            self.decall(_update_flattened_models)
 
         self.decall(lambda w: w.post_aggr(epoch, batch))

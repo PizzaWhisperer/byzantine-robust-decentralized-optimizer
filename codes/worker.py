@@ -6,6 +6,13 @@ from .utils import Timer
 
 debug_logger = logging.getLogger("debug")
 
+def repeat_model(worker, model):
+    
+    neighbors = []
+    for w in worker.running["neighbor_workers"]:
+        neighbors.append(w.index)
+    models = [model]*len(neighbors)
+    return dict(zip(neighbors, models))
 
 class Worker(object):
     def __init__(

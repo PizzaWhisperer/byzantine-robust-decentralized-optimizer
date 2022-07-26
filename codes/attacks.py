@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from scipy.stats import norm
 
-from codes.worker import ByzantineWorker
+from codes.worker import ByzantineWorker, repeat_model
 from codes.aggregator import DecentralizedAggregator
 
 
@@ -16,7 +16,7 @@ class DecentralizedByzantineWorker(ByzantineWorker):
 
     def _initialize_target(self):
         if self.target is None:
-            assert len(self.running["neighbor_workers"]) == 1
+            assert len(self.running["neighbor_workers"]) >= 1
             self.target = self.running["neighbor_workers"][0]
             self.tagg = self.target.running["aggregator"]
             self.target_good_neighbors = self.simulator.get_good_neighbor_workers(
@@ -30,13 +30,13 @@ class DissensusWorker(DecentralizedByzantineWorker):
         self.epsilon = epsilon
 
     def _attack_decentralized_aggregator(self, mixing=None):
-        tm = self.target.running["flattened_model"]
+        tm = self.target.running["flattened_models"][self.index]
 
         # Compute Byzantine weights
         partial_sum = []
         partial_byz_weights = []
         for neighbor in self.target.running["neighbor_workers"]:
-            nm = neighbor.running["flattened_model"]
+            nm = neighbor.running["flattened_models"][self.index]
             nn = neighbor.running["node"]
             nw = mixing or self.tagg.weights[nn.index]
             if isinstance(neighbor, ByzantineWorker):
@@ -55,6 +55,92 @@ class DissensusWorker(DecentralizedByzantineWorker):
         if isinstance(self.tagg, DecentralizedAggregator):
             # Dissensus using the gossip weight
             tm, v = self._attack_decentralized_aggregator()
+            self.running["flattened_modes"] = repeat_model(self, tm - self.epsilon * v)
+        else:
+            # TODO: check
+            # Dissensus using the gossip weight
+            mixing = 1 / (len(self.target.running["neighbor_workers"]) + 1)
+            tm, v = self._attack_decentralized_aggregator(mixing)
+            self.running["flattened_models"] = repeat_model(self, tm - self.epsilon * v)
+
+
+            
+##################################################################################
+
+
+
+class SandTrapWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
+
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+    def pre_aggr(self, epoch, batch):
+        raise NotImplementedError
+        
+class SandTrapNoClipWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
+
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+
+    def pre_aggr(self, epoch, batch):
+        raise NotImplementedError
+
+
+class EchoWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
+
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+
+    def pre_aggr(self, epoch, batch):
+        raise NotImplementedError
+        
+class EchoNoClipWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
+
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+
+    def pre_aggr(self, epoch, batch):
+        raise NotImplementedError
+
+            
+class StateOverrideWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
+
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+
+    def pre_aggr(self, epoch, batch):
+        raise NotImplementedError
+            
+            
+            
+class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
+
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+        
+    def pre_aggr(self, epoch, batch):
+        self._initialize_target()
+
+        if isinstance(self.tagg, DecentralizedAggregator):
+            # Attack using the gossip weight
+            tm, v = self._attack_decentralized_aggregator()
             self.running["flattened_model"] = tm - self.epsilon * v
         else:
             # TODO: check
@@ -62,14 +148,42 @@ class DissensusWorker(DecentralizedByzantineWorker):
             mixing = 1 / (len(self.target.running["neighbor_workers"]) + 1)
             tm, v = self._attack_decentralized_aggregator(mixing)
             self.running["flattened_model"] = tm - self.epsilon * v
+            
+            
+class StateOverrideNoClipNoTMWorker(DecentralizedByzantineWorker):
+    def __init__(self, target, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.target = target
 
+    def _attack_decentralized_aggregator(self, mixing=None):
+        raise NotImplementedError
+        
+    def pre_aggr(self, epoch, batch):
+        self._initialize_target()
 
+        if isinstance(self.tagg, DecentralizedAggregator):
+            # Attack using the gossip weight
+            tm, v = self._attack_decentralized_aggregator()
+            self.running["flattened_model"] = tm - self.epsilon * v
+        else:
+            # TODO: check
+            # Dissensus using the gossip weight
+            mixing = 1 / (len(self.target.running["neighbor_workers"]) + 1)
+            v = self._attack_decentralized_aggregator(mixing)
+            self.running["flattened_model"] = v
+        
+        
+        
+##################################################################################
+        
+    
+    
 class BitFlippingWorker(ByzantineWorker):
     def __str__(self) -> str:
         return "BitFlippingWorker"
 
     def pre_aggr(self, epoch, batch):
-        self.running["flattened_model"] = -self.running["flattened_model"]
+        self.running["flattened_models"] = repeat_model(self, -self.running["flattened_model"][self.index])
 
 
 class LabelFlippingWorker(ByzantineWorker):
@@ -143,16 +257,16 @@ class ALittleIsEnoughAttack(DecentralizedByzantineWorker):
     def pre_aggr(self, epoch, batch):
         self._initialize_target()
 
-        tm = self.target.running["flattened_model"]
+        tm = self.target.running["flattened_models"][self.index]
         models = [tm]
         for neighbor in self.target_good_neighbors:
-            models.append(neighbor.running["flattened_model"])
+            models.append(neighbor.running["flattened_models"][self.index])
 
         stacked_models = torch.stack(models, 1)
         mu = torch.mean(stacked_models, 1)
         std = torch.std(stacked_models, 1)
 
-        self.running["flattened_model"] = mu - std * self.z_max
+        self.running["flattened_models"] = repeat_model(self, mu - std * self.z_max)
 
 
 class IPMAttack(DecentralizedByzantineWorker):
@@ -172,12 +286,12 @@ class IPMAttack(DecentralizedByzantineWorker):
     def pre_aggr(self, epoch, batch):
         self._initialize_target()
 
-        tm = self.target.running["flattened_model"]
+        tm = self.target.running["flattened_models"][self.index]
         models = [tm]
         for neighbor in self.target_good_neighbors:
-            models.append(neighbor.running["flattened_model"])
+            models.append(neighbor.running["flattened_models"][self.index])
 
-        self.running["flattened_model"] = -self.epsilon * sum(models) / len(models)
+        self.running["flattened_models"] = repeat_model(self, -self.epsilon * sum(models) / len(models))
 
 
 def get_attackers(
