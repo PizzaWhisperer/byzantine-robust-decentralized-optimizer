@@ -434,7 +434,7 @@ def get_attackers(
             target = int(args.attack[len("echo") :])
         attacker = EchoNoClipWorker(
             targeted=targeted,
-            target=target
+            target=target,
             simulator=trainer,
             index=rank,
             data_loader=loader,
