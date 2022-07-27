@@ -267,7 +267,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             "echo": "Echo",
             "echo0": "Echo 0",
             "sandtrap0": "SandTrap",
-            "stateoverride", "StateOverride",
+            "stateoverride": "StateOverride",
 
         }
 
