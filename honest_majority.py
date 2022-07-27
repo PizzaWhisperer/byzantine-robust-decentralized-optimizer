@@ -194,9 +194,9 @@ class HonestMajorityRunner(MNISTTemplate):
                 for attack, atk_name in [
                     # ("BF", "BF"),
                     # ("LF", "LF"),
-                    ("IPM", "IPM"),
-                    ("ALIE10", "ALIE"),
-                    ("dissensus1.5", "Dissensus"),
+                    #("IPM", "IPM"),
+                    #("ALIE10", "ALIE"),
+                    #("dissensus1.5", "Dissensus"),
                     ("sandtrap"+str(target), "SandTrap"),
                     ("echo", "Echo"),
                     ("echo"+str(target), "Echo Targeted"),

@@ -6,7 +6,8 @@ function optimization_delta {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
     for delta in 0 0.25 0.5 0.75 1
     do
-        for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
+        #for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
+        for attack in "echo" "echo0" "sandtrap0" "stateoverride"
         do
             python optimization_delta.py ${COMMON} -n 12 -f 1 --attack $attack --momentum 0.9 \
             --graph tcb5,1,${delta} --noniid 1 --agg "scp1" --identifier "exp" &
@@ -32,7 +33,8 @@ function honest_majority {
     COMMON="--lr 1e-2 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30"
     for agg in "scp0.1" "tm2" "rfa8" "mozi0.4,0.5"
     do
-        for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
+        #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
+        for attack in "echo" "echo0" "sandtrap0" "stateoverride"
         do
             python honest_majority.py ${COMMON} -n 16 -f 11 --attack ${attack} --momentum 0.9 \
             --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp" &
@@ -48,7 +50,8 @@ function honest_majority {
 
     for agg in "scp0.1" "tm2" "rfa8" "mozi0.4,0.5"
     do
-        for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
+        #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
+        for attack in "echo" "echo0" "sandtrap0" "stateoverride"
         do
             python honest_majority.py ${COMMON} -n 15 -f 10 --attack ${attack} --momentum 0.9 \
             --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" &
