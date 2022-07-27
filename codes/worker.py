@@ -8,7 +8,7 @@ debug_logger = logging.getLogger("debug")
 
 def repeat_model(worker, model):
     
-    neighbors = []
+    neighbors = [worker.index]
     for w in worker.running["neighbor_workers"]:
         neighbors.append(w.index)
     models = [model]*len(neighbors)

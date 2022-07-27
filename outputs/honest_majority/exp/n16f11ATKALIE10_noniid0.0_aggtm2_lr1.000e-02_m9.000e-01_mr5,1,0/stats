@@ -1,6 +1,6 @@
-{'_meta': {'type': 'graph'}, 'spectral_gap': 0.05663963285973006}
+{'_meta': {'type': 'graph'}, 'spectral_gap': 0.0566396328597325}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 0, 'Length': 160, 'Loss': 2.305543804168701, 'top1': 12.5}
-{'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 160, 'Loss': nan, 'top1': 9.375}
+{'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 160, 'Loss': nan, 'top1': 10.0}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 20, 'Length': 160, 'Loss': nan, 'top1': 11.25}
 {'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
 {'_meta': {'type': 'train'}, 'E': 2, 'B': 0, 'Length': 160, 'Loss': nan, 'top1': 6.25}

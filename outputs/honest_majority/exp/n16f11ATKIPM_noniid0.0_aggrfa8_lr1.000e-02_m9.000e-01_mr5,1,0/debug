@@ -18,7 +18,7 @@
 => Add worker ByzantineWorker(index=15)
 
 === Start adding graph ===
-<__main__.MaliciousRing object at 0x7f67cf271310>
+<__main__.MaliciousRing object at 0x7ff5206c13d0>
 
 Train epoch 1
 [E 1B0  |    512/60000 (  1%) ] Loss: 2.3055 top1= 12.5000

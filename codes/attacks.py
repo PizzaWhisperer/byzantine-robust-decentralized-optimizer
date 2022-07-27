@@ -30,13 +30,13 @@ class DissensusWorker(DecentralizedByzantineWorker):
         self.epsilon = epsilon
 
     def _attack_decentralized_aggregator(self, mixing=None):
-        tm = self.target.running["flattened_models"][self.index]
+        tm = self.target.running["flattened_models"][self.target.index]
 
         # Compute Byzantine weights
         partial_sum = []
         partial_byz_weights = []
         for neighbor in self.target.running["neighbor_workers"]:
-            nm = neighbor.running["flattened_models"][self.index]
+            nm = neighbor.running["flattened_models"][neighbor.index]
             nn = neighbor.running["node"]
             nw = mixing or self.tagg.weights[nn.index]
             if isinstance(neighbor, ByzantineWorker):
@@ -257,10 +257,10 @@ class ALittleIsEnoughAttack(DecentralizedByzantineWorker):
     def pre_aggr(self, epoch, batch):
         self._initialize_target()
 
-        tm = self.target.running["flattened_models"][self.index]
+        tm = self.target.running["flattened_models"][self.target.index]
         models = [tm]
         for neighbor in self.target_good_neighbors:
-            models.append(neighbor.running["flattened_models"][self.index])
+            models.append(neighbor.running["flattened_models"][neighbor.index])
 
         stacked_models = torch.stack(models, 1)
         mu = torch.mean(stacked_models, 1)
@@ -286,10 +286,10 @@ class IPMAttack(DecentralizedByzantineWorker):
     def pre_aggr(self, epoch, batch):
         self._initialize_target()
 
-        tm = self.target.running["flattened_models"][self.index]
+        tm = self.target.running["flattened_models"][self.target.index]
         models = [tm]
         for neighbor in self.target_good_neighbors:
-            models.append(neighbor.running["flattened_models"][self.index])
+            models.append(neighbor.running["flattened_models"][neighbor.index])
 
         self.running["flattened_models"] = repeat_model(self, -self.epsilon * sum(models) / len(models))
 
