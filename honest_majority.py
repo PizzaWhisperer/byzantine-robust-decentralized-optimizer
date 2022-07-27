@@ -182,7 +182,8 @@ class HonestMajorityRunner(MNISTTemplate):
         out_dir = os.path.abspath(os.path.join(self.log_dir, os.pardir))
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
-
+        target = 0
+        # TODO: how can we pick better target?
         def loop_files():
             for agg, agg_name in [
                 # ("cp0.1", "CP"),
@@ -196,6 +197,10 @@ class HonestMajorityRunner(MNISTTemplate):
                     ("IPM", "IPM"),
                     ("ALIE10", "ALIE"),
                     ("dissensus1.5", "Dissensus"),
+                    ("sandtrap"+str(target), "SandTrap"),
+                    ("echo", "Echo"),
+                    ("echo"+str(target), "Echo Targeted"),
+                    ("stateoverride", "StateOverride")
                 ]:
                     for honest_majority in [False, True]:
                         if honest_majority:
@@ -317,7 +322,7 @@ class HonestMajorityRunner(MNISTTemplate):
 
         a = g.legend
 
-        for i in range(3):
+        for i in range(len(g.axes[0])):
             g.axes[0][i].tick_params(axis='both', which='major', pad=-4)
         g.axes[0][0].set_ylabel('Accuracy (%)', labelpad=-2)
 

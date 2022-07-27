@@ -1,15 +1,15 @@
 #!/bin/bash
 # CUDA_VISIBLE_DEVICES=4 PYTHONPATH="../../" bash .sh
-# ps | grep -ie python | awk '{print $1}' | xargs kill -9 
+# ps | grep -ie python | awk '{print $1}' | xargs kill -9
 
 function optimization_delta {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
     for delta in 0 0.25 0.5 0.75 1
     do
-        for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF"
+        for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
         do
             python optimization_delta.py ${COMMON} -n 12 -f 1 --attack $attack --momentum 0.9 \
-            --graph tcb5,1,${delta} --noniid 1 --agg "scp1" --identifier "exp" & 
+            --graph tcb5,1,${delta} --noniid 1 --agg "scp1" --identifier "exp" &
             pids[$!]=$!
         done
 
@@ -32,10 +32,10 @@ function honest_majority {
     COMMON="--lr 1e-2 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30"
     for agg in "scp0.1" "tm2" "rfa8" "mozi0.4,0.5"
     do
-        for attack in "ALIE10" "IPM" "dissensus1.5"
+        for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
         do
             python honest_majority.py ${COMMON} -n 16 -f 11 --attack ${attack} --momentum 0.9 \
-            --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp" & 
+            --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp" &
             pids[$!]=$!
         done
     done
@@ -48,10 +48,10 @@ function honest_majority {
 
     for agg in "scp0.1" "tm2" "rfa8" "mozi0.4,0.5"
     do
-        for attack in "ALIE10" "IPM" "dissensus1.5"
+        for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
         do
             python honest_majority.py ${COMMON} -n 15 -f 10 --attack ${attack} --momentum 0.9 \
-            --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" & 
+            --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" &
             pids[$!]=$!
         done
     done
@@ -92,7 +92,7 @@ function dumbbell {
 }
 
 function dumbbell_plot {
-    # Task: Compare aggregators on iid noniid topology 
+    # Task: Compare aggregators on iid noniid topology
     COMMON=" -n 20 -f 0 --graph dumbbell10,0,0 --attack NA --lr 0.01 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30 --momentum 0.9"
     python dumbbell.py ${COMMON} --noniid 1 --agg "gossip_avg" --identifier "exp" --analyze
 }
@@ -164,7 +164,7 @@ function dumbbell_CIFAR {
             pids[$!]=$!
         done
     done
-    
+
     # wait for all pids
     for pid in ${pids[*]}; do
         wait $pid
@@ -173,7 +173,7 @@ function dumbbell_CIFAR {
 }
 
 function dumbbell_CIFAR_plot {
-    # Task: Compare aggregators on iid noniid topology 
+    # Task: Compare aggregators on iid noniid topology
     COMMON="-n 20 -f 0 --graph dumbbell10,0,0 --attack NA --lr 0.1 --use-cuda --epochs 150 --batch-size 64 --max-batch-size-per-epoch 9999 --momentum 0.9"
 
     for noniid in 1
@@ -228,7 +228,7 @@ do
         "dumbbell_CIFAR")
             dumbbell_CIFAR
             ;;
-        
+
         "dumbbell_CIFAR_plot")
             dumbbell_CIFAR_plot
             ;;
@@ -236,10 +236,8 @@ do
         "debug")
             ;;
 
-        *) 
+        *)
             echo "invalid option $REPLY"
             ;;
     esac
 done
-
-

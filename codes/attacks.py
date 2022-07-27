@@ -396,6 +396,56 @@ def get_attackers(
         )
         return attacker
 
+    if args.attack.startswith("sandtrap"):
+        target = int(args.attack[len("sandtrap") :])
+        attacker = SandTrapNoClipWorker(
+            target=target,
+            simulator=trainer,
+            index=rank,
+            data_loader=loader,
+            model=model,
+            loss_func=loss_func,
+            device=device,
+            optimizer=opt,
+            lr_scheduler=lr_scheduler,
+        )
+        return attacker
+    if args.attack.startswith("stateoverride"):
+        state = 0
+        # TODO: what do we put as state? All 0 tensor flow?
+        attacker = StateOverrideNoClipWorker(
+            state=state,
+            simulator=trainer,
+            index=rank,
+            data_loader=loader,
+            model=model,
+            loss_func=loss_func,
+            device=device,
+            optimizer=opt,
+            lr_scheduler=lr_scheduler,
+        )
+        return attacker
+
+    if args.attack.startswith("echo"):
+        targeted = False
+        target = None
+        if len(args.attack) > len("echo"):
+            targeted = True
+            target = int(args.attack[len("echo") :])
+        attacker = EchoNoClipWorker(
+            targeted=targeted,
+            target=target
+            simulator=trainer,
+            index=rank,
+            data_loader=loader,
+            model=model,
+            loss_func=loss_func,
+            device=device,
+            optimizer=opt,
+            lr_scheduler=lr_scheduler,
+        )
+        return attacker
+
     if args.attack.startswith("dissensus"):
         epsilon = float(args.attack[len("dissensus") :])
         attacker = DissensusWorker(
