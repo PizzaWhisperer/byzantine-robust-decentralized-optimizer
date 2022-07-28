@@ -86,9 +86,9 @@ class EchoWorker(DecentralizedByzantineWorker):
             self.running["flattened_models"] = self._attack_decentralized_aggregator(mixing)
 
 class EchoNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, target_node, *args, **kwargs):
+    def __init__(self, targeted, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.target_node = target_node
+        self.targeted = targeted
 
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
