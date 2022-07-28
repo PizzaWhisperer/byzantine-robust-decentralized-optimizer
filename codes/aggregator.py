@@ -496,6 +496,7 @@ class SelfCenteredClipping(DecentralizedAggregator):
         self.logger = logging.getLogger("debug")
 
     def _agg(self, local_inputs, neighbor_inputs, tau):
+        print(neighbor_inputs)
         zs = [
             local_inputs + clip(neighbor - local_inputs, tau)
             for neighbor in neighbor_inputs

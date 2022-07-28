@@ -17,9 +17,9 @@ class DecentralizedByzantineWorker(ByzantineWorker):
     def _initialize_target(self):
         if isinstance(self.target, int):
             nodes_set = set(self.running["neighbor_workers"])
-            to_rm = {}
+            to_rm = set()
             while isinstance(self.target, int) or len(nodes_set) == 0:
-                to_add = {}
+                to_add = set()
                 for w in nodes_set:
                     if w.index == self.target:
                         self.target = w
