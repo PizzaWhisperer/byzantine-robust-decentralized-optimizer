@@ -28,7 +28,7 @@ class DecentralizedByzantineWorker(ByzantineWorker):
                             w.running["node"]
                             )
                         break
-                    to_rm.update({w})
+                    to_rm.update(set(w))
                     to_add.update(w.running["neighbor_workers"])
                 nodes_set.remove(to_rm)
                 nodes_set.update(to_add)
