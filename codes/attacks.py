@@ -7,10 +7,10 @@ from codes.aggregator import DecentralizedAggregator
 
 
 class DecentralizedByzantineWorker(ByzantineWorker):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, target=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # The target of attack
-        self.target = None
+        self.target = target
         self.tagg = None
         self.target_good_neighbors = None
 
@@ -108,7 +108,6 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
         super().__init__(*args, **kwargs)
         self.targeted = targeted
 
-
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
         if self.targeted:
@@ -116,9 +115,12 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
             for w in self.running["neighbor_workers"] + [self]:
                 thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
         else:
-            for w in self.running["neighbor_workers"] +  [self]:
+            for w in self.running["neighbor_workers"]:
                 tm = w.running["flattened_models"][w.index]
                 thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
+            # TODO: below is stupid trick to have a self model because + self in loop does not work
+            print("Self weight", self.running["aggregator"].weights[self.index])
+            thetas[self.index] = tm/w.running["aggregator"].weights[self.index]
         return thetas
 
     def pre_aggr(self, epoch, batch):

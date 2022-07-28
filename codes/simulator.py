@@ -445,13 +445,14 @@ class DecentralizedTrainer(_SimulatorBase):
                 #inputs.append(w.running["flattened_model"])
                 # MODELS_FIX
                 inputs.append(w.running["flattened_models"][worker.index])
-            print("idx", worker.index, worker.running["flattened_models"])
             worker.running["aggregated_model"] = agg(
             #worker.running["flattened_model"],
             # MODELS_FIX
             worker.running["flattened_models"][worker.index],
             inputs,
             )
+            if isinstance(worker, ByzantineWorker):
+                print("idx", worker.index, worker.running["flattened_models"], worker.running["aggregated_model"])
 
         self.decall(_aggregate_models)
         self.decall(lambda w: w.post_aggr(epoch, batch))
