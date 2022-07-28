@@ -183,9 +183,9 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
 
 
 class StateOverrideWorker(DecentralizedByzantineWorker):
-    def __init__(self, state, *args, **kwargs):
+    def __init__(self, target_state, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.state = state
+        self.target_state = target_state
 
     def _attack_decentralized_aggregator(self, mixing=None):
         raise NotImplementedError
@@ -208,9 +208,9 @@ class StateOverrideWorker(DecentralizedByzantineWorker):
 
 
 class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, state, *args, **kwargs):
+    def __init__(self, target_state, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.state = state
+        self.target_state = target_state
 
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
@@ -218,7 +218,7 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
             network_contrib = 0
             for ww in w.running["neighbor_workers"]:
                 network_contrib += ww.running["flattened_models"][w.index] * w.running["aggregator"].weights[ww.index]
-            theta[w.index] = (self.state - network_contrib)/w.running["aggregator"].weights[self.index]
+            theta[w.index] = (self.target_state - network_contrib)/w.running["aggregator"].weights[self.index]
         return thetas
 
 
@@ -433,10 +433,10 @@ def get_attackers(
         return attacker
 
     if args.attack.startswith("stateoverride"):
-        state = 0
+        target_state = 0
         # TODO: what do we put as state? All 0 tensor flow?
         attacker = StateOverrideNoClipWorker(
-            state=state,
+            target_state=target_state,
             simulator=trainer,
             index=rank,
             data_loader=loader,
