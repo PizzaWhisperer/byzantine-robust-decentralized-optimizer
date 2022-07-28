@@ -94,7 +94,9 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
     def _initialize_target(self):
         if isinstance(self.target, int):
             nodes_set = set(self.running["neighbor_workers"])
+            to_rm = {}
             while isinstance(self.target, int) or len(nodes_set) == 0:
+                to_add = {}
                 for w in nodes_set:
                     if w.index == self.target:
                         self.target = w
@@ -103,8 +105,10 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
                             w.running["node"]
                             )
                         break
-                    nodes_set.remove(w)
-                    nodes_set.update(w.running["neighbor_workers"])
+                    to_rm.update(w)
+                    to_add.update(w.running["neighbor_workers"])
+                nodes_set.remove(to_rm)
+                nodes_set.update(to_add)
 
         if self.target is None or isinstance(self.target, int):
             assert len(self.running["neighbor_workers"]) >= 1
@@ -439,6 +443,7 @@ def get_attackers(
         # TODO: what do we put as state? All 0 tensor flow?
         attacker = StateOverrideNoClipWorker(
             state=state,
+            target=None,
             simulator=trainer,
             index=rank,
             data_loader=loader,

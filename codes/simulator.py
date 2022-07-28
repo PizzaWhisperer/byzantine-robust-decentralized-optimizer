@@ -449,6 +449,7 @@ class DecentralizedTrainer(_SimulatorBase):
             worker.running["aggregated_model"] = agg(
                 #worker.running["flattened_model"],
                 # MODELS_FIX
+                print("idx", worker.index, worker.running["flattened_models"])
                 worker.running["flattened_models"][worker.index],
                 inputs,
             )
@@ -625,18 +626,18 @@ class MultiRoundsDecentralizedTrainer(DecentralizedTrainer):
             inputs = []
             for w in worker.running["neighbor_workers"]:
                 #inputs.append(w.running["flattened_model"])
-                # MODELS_FIX 
+                # MODELS_FIX
                 inputs.append(w.running["flattened_models"][worker.index])
-            
-            
+
+
             worker.running["aggregated_model"] = agg(
                 #worker.running["flattened_model"],
                 # MODELS_FIX
                 worker.running["flattened_models"][worker.index],
                 inputs,
             )
-            
- 
+
+
         def _update_flattened_models(worker):
             #worker.running["flattened_model"] = worker.running["aggregated_model"].clone()
             #MODELS_FIX
