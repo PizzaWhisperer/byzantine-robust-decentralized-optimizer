@@ -30,7 +30,8 @@ class DecentralizedByzantineWorker(ByzantineWorker):
                         break
                     to_rm.add(w)
                     to_add.update(w.running["neighbor_workers"])
-                nodes_set.remove(to_rm)
+                for idx_to_rm in to_rm:
+                    nodes_set.discard(idx_to_rm)
                 nodes_set.update(to_add)
 
         if self.target is None or isinstance(self.target, int):
