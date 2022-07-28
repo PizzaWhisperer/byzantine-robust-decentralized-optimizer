@@ -121,7 +121,7 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
                 thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
             # TODO: below is stupid trick to have a self model because + self in loop does not work
 
-            print("Self update", self.running["flattened_models"][self.index])
+            #print("Self update", self.running["flattened_models"][self.index])
             thetas[self.index] = tm/w.running["aggregator"].weights[self.index]
         return thetas
 
