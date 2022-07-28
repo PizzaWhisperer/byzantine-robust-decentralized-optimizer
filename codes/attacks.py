@@ -28,7 +28,7 @@ class DecentralizedByzantineWorker(ByzantineWorker):
                             w.running["node"]
                             )
                         break
-                    to_rm.update(w)
+                    to_rm.update({w})
                     to_add.update(w.running["neighbor_workers"])
                 nodes_set.remove(to_rm)
                 nodes_set.update(to_add)
@@ -119,7 +119,8 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
                 tm = w.running["flattened_models"][w.index]
                 thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
             # TODO: below is stupid trick to have a self model because + self in loop does not work
-            print("Self weight", self.running["aggregator"].weights[self.index])
+
+            print("Self update", self.running["flattened_models"][self.index])
             thetas[self.index] = tm/w.running["aggregator"].weights[self.index]
         return thetas
 

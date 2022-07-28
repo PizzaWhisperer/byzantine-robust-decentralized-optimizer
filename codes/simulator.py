@@ -451,8 +451,6 @@ class DecentralizedTrainer(_SimulatorBase):
             worker.running["flattened_models"][worker.index],
             inputs,
             )
-            if isinstance(worker, ByzantineWorker):
-                print("idx", worker.index, worker.running["flattened_models"], worker.running["aggregated_model"])
 
         self.decall(_aggregate_models)
         self.decall(lambda w: w.post_aggr(epoch, batch))
