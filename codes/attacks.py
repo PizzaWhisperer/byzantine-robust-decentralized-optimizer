@@ -167,7 +167,7 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
             network_contrib += w.running["flattened_models"][self.target.index] * self.tagg.weights[w.index]
         for w in self.running["neighbor_workers"]:
             if w.index == self.target.index:
-                theta[w.index] = -network_contrib/self.tagg.weights[self.index]
+                thetas[w.index] = -network_contrib/self.tagg.weights[self.index]
             else:
                 theta[w.index] = network_contrib/w.running["aggregator"].weights[self.index]
         return thetas
