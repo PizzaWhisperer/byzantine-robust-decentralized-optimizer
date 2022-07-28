@@ -119,11 +119,11 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
         if self.targeted:
             tm = self.target.running["flattened_models"][self.target.index]
             for w in self.running["neighbor_workers"]:
-                thetas[w.index] = tm/w.weights[self.index]
+                thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
         else:
             for w in self.running["neighbor_workers"]:
                 tm = w.running["flattened_models"][w.index]
-                thetas[w.index] = tm/w.weights[self.index]
+                thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -167,12 +167,12 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
         tm = self.target.running["flattened_models"][self.target.index]
         network_contrib = 0
         for w in self.target.running["neighbor_workers"]:
-            network_contrib += w.running["flattened_models"][self.target.index] * self.target.weights[w.index]
+            network_contrib += w.running["flattened_models"][self.target.index] * self.tagg.weights[w.index]
         for w in self.running["neighbor_workers"]:
             if w.index == self.target.index:
-                theta[w.index] = -network_contrib/w.weights[self.index]
+                theta[w.index] = -network_contrib/self.tagg.weights[self.index]
             else:
-                theta[w.index] = network_contrib/w.weights[self.index]
+                theta[w.index] = network_contrib/w.running["aggregator"].weights[self.index]
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -220,8 +220,8 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
         for w in self.running["neighbor_workers"]:
             network_contrib = 0
             for ww in w.running["neighbor_workers"]:
-                network_contrib += ww.running["flattened_models"][w.index] * w.weights[ww.index]
-            theta[w.index] = (self.state - network_contrib)/w.weights[self.index]
+                network_contrib += ww.running["flattened_models"][w.index] * w.running["aggregator"].weights[ww.index]
+            theta[w.index] = (self.state - network_contrib)/w.running["aggregator"].weights[self.index]
         return thetas
 
 
