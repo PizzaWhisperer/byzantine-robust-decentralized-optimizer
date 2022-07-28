@@ -445,11 +445,10 @@ class DecentralizedTrainer(_SimulatorBase):
                 #inputs.append(w.running["flattened_model"])
                 # MODELS_FIX
                 inputs.append(w.running["flattened_models"][worker.index])
-
+            print("idx", worker.index, worker.running["flattened_models"])
             worker.running["aggregated_model"] = agg(
                 #worker.running["flattened_model"],
                 # MODELS_FIX
-                print("idx", worker.index, worker.running["flattened_models"])
                 worker.running["flattened_models"][worker.index],
                 inputs,
             )
