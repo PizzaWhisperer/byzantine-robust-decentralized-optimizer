@@ -7,7 +7,6 @@ from .utils import Timer
 debug_logger = logging.getLogger("debug")
 
 def repeat_model(worker, model):
-    
     neighbors = [worker.index]
     for w in worker.running["neighbor_workers"]:
         neighbors.append(w.index)

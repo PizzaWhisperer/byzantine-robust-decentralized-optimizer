@@ -91,6 +91,29 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
         self.targeted = targeted
         self.target = target
 
+    def _initialize_target(self):
+        if isinstance(self.target, int):
+            nodes_set = set(self.running["neighbor_workers"])
+            while isinstance(self.target, int) or len(nodes_set) == 0:
+                for w in nodes_set:
+                    if w.index == self.target:
+                        self.target = w
+                        self.tagg = w.running["aggregator"]
+                        self.target_good_neighbors = self.simulator.get_good_neighbor_workers(
+                            w.running["node"]
+                            )
+                        break
+                    nodes_set.remove(w)
+                    nodes_set.update(w.running["neighbor_workers"])
+
+        if self.target is None or isinstance(self.target, int):
+            assert len(self.running["neighbor_workers"]) >= 1
+            self.target = self.running["neighbor_workers"][0]
+            self.tagg = self.target.running["aggregator"]
+            self.target_good_neighbors = self.simulator.get_good_neighbor_workers(
+                self.target.running["node"]
+            )
+
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
         if self.targeted:
