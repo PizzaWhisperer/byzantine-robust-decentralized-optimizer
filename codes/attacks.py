@@ -122,10 +122,10 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
         thetas = {}
         if self.targeted:
             tm = self.target.running["flattened_models"][self.target.index]
-            for w in self.running["neighbor_workers"]:
+            for w in self.running["neighbor_workers"] + [self]:
                 thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
         else:
-            for w in self.running["neighbor_workers"]:
+            for w in self.running["neighbor_workers"] +  [self]:
                 tm = w.running["flattened_models"][w.index]
                 thetas[w.index] = tm/w.running["aggregator"].weights[self.index]
         return thetas
@@ -163,7 +163,7 @@ class SandTrapWorker(DecentralizedByzantineWorker):
 
 
 class SandTrapNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, target, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def _attack_decentralized_aggregator(self, mixing=None):
@@ -438,12 +438,12 @@ def get_attackers(
             lr_scheduler=lr_scheduler,
         )
         return attacker
+
     if args.attack.startswith("stateoverride"):
         state = 0
         # TODO: what do we put as state? All 0 tensor flow?
         attacker = StateOverrideNoClipWorker(
             state=state,
-            target=None,
             simulator=trainer,
             index=rank,
             data_loader=loader,
