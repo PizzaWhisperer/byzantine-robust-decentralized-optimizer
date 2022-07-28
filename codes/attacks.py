@@ -15,7 +15,25 @@ class DecentralizedByzantineWorker(ByzantineWorker):
         self.target_good_neighbors = None
 
     def _initialize_target(self):
-        if self.target is None:
+        if isinstance(self.target, int):
+            nodes_set = set(self.running["neighbor_workers"])
+            to_rm = {}
+            while isinstance(self.target, int) or len(nodes_set) == 0:
+                to_add = {}
+                for w in nodes_set:
+                    if w.index == self.target:
+                        self.target = w
+                        self.tagg = w.running["aggregator"]
+                        self.target_good_neighbors = self.simulator.get_good_neighbor_workers(
+                            w.running["node"]
+                            )
+                        break
+                    to_rm.update(w)
+                    to_add.update(w.running["neighbor_workers"])
+                nodes_set.remove(to_rm)
+                nodes_set.update(to_add)
+
+        if self.target is None or isinstance(self.target, int):
             assert len(self.running["neighbor_workers"]) >= 1
             self.target = self.running["neighbor_workers"][0]
             self.tagg = self.target.running["aggregator"]
@@ -86,37 +104,10 @@ class EchoWorker(DecentralizedByzantineWorker):
             self.running["flattened_models"] = self._attack_decentralized_aggregator(mixing)
 
 class EchoNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, targeted, target, *args, **kwargs):
+    def __init__(self, targeted, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.targeted = targeted
-        self.target = target
 
-    def _initialize_target(self):
-        if isinstance(self.target, int):
-            nodes_set = set(self.running["neighbor_workers"])
-            to_rm = {}
-            while isinstance(self.target, int) or len(nodes_set) == 0:
-                to_add = {}
-                for w in nodes_set:
-                    if w.index == self.target:
-                        self.target = w
-                        self.tagg = w.running["aggregator"]
-                        self.target_good_neighbors = self.simulator.get_good_neighbor_workers(
-                            w.running["node"]
-                            )
-                        break
-                    to_rm.update(w)
-                    to_add.update(w.running["neighbor_workers"])
-                nodes_set.remove(to_rm)
-                nodes_set.update(to_add)
-
-        if self.target is None or isinstance(self.target, int):
-            assert len(self.running["neighbor_workers"]) >= 1
-            self.target = self.running["neighbor_workers"][0]
-            self.tagg = self.target.running["aggregator"]
-            self.target_good_neighbors = self.simulator.get_good_neighbor_workers(
-                self.target.running["node"]
-            )
 
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
@@ -140,9 +131,8 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
             self.running["flattened_models"] = self._attack_decentralized_aggregator(mixing)
 
 class SandTrapWorker(DecentralizedByzantineWorker):
-    def __init__(self, target, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.target = target
 
     def _attack_decentralized_aggregator(self, mixing=None):
         raise NotImplementedError
@@ -163,7 +153,7 @@ class SandTrapWorker(DecentralizedByzantineWorker):
 
 
 class SandTrapNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, target, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def _attack_decentralized_aggregator(self, mixing=None):
@@ -190,7 +180,7 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
 
 
 class StateOverrideWorker(DecentralizedByzantineWorker):
-    def __init__(self, target, *args, **kwargs):
+    def __init__(self, state, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.state = state
 
@@ -215,7 +205,7 @@ class StateOverrideWorker(DecentralizedByzantineWorker):
 
 
 class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, target, *args, **kwargs):
+    def __init__(self, state, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.state = state
 
