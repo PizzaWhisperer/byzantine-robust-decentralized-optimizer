@@ -169,7 +169,7 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
             if w.index == self.target.index:
                 thetas[w.index] = -network_contrib/self.tagg.weights[self.index]
             else:
-                theta[w.index] = network_contrib/w.running["aggregator"].weights[self.index]
+                thetas[w.index] = network_contrib/w.running["aggregator"].weights[self.index]
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -218,7 +218,7 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
             network_contrib = 0
             for ww in w.running["neighbor_workers"]:
                 network_contrib += ww.running["flattened_models"][w.index] * w.running["aggregator"].weights[ww.index]
-            theta[w.index] = (self.target_state - network_contrib)/w.running["aggregator"].weights[self.index]
+            thetas[w.index] = (self.target_state - network_contrib)/w.running["aggregator"].weights[self.index]
         return thetas
 
 
