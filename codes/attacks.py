@@ -124,7 +124,7 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
             # TODO: below is stupid trick to have a self model because + self in loop does not work
 
             #print("Self update", self.running["flattened_models"][self.index])
-            thetas[self.index] = tm/w.running["aggregator"].weights[self.index]
+            thetas[self.index] = tm/nw
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -167,12 +167,14 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
         tm = self.target.running["flattened_models"][self.target.index]
         network_contrib = 0
         for w in self.target.running["neighbor_workers"]:
-            network_contrib += w.running["flattened_models"][self.target.index] * self.tagg.weights[w.index]
+            nw = mixing or self.tagg.weights[w.index]
+            network_contrib += w.running["flattened_models"][self.target.index] * nw
         for w in self.running["neighbor_workers"]:
+            nw = mixing or w.running["aggregator"].weights[self.index]
             if w.index == self.target.index:
-                thetas[w.index] = -network_contrib/self.tagg.weights[self.index]
+                thetas[w.index] = -network_contrib/nw
             else:
-                thetas[w.index] = network_contrib/w.running["aggregator"].weights[self.index]
+                thetas[w.index] = network_contrib/nw
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -220,8 +222,10 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
         for w in self.running["neighbor_workers"]:
             network_contrib = 0
             for ww in w.running["neighbor_workers"]:
-                network_contrib += ww.running["flattened_models"][w.index] * w.running["aggregator"].weights[ww.index]
-            thetas[w.index] = (self.target_state - network_contrib)/w.running["aggregator"].weights[self.index]
+                nw = mixing or w.running["aggregator"].weights[ww.index]
+                network_contrib += ww.running["flattened_models"][w.index] * nw
+            nw = mixing or w.running["aggregator"].weights[self.index]
+            thetas[w.index] = (self.target_state - network_contrib)/nw
         return thetas
 
 
