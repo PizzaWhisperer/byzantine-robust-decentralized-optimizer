@@ -11,3 +11,2340 @@
 => Add worker SGDMWorker(index=8, momentum=0.9)
 => Add worker SGDMWorker(index=9, momentum=0.9)
 => Add worker SGDMWorker(index=10, momentum=0.9)
+=> Add worker ByzantineWorker(index=11)
+
+=== Start adding graph ===
+TwoCliquesWithByzantine(m=5,b=1)
+
+Train epoch 1
+[E 1B0  |    384/60000 (  1%) ] Loss: 2.3142 top1=  7.6705
+
+=== Peeking data label distribution E1B0 ===
+Worker 0 has targets: tensor([0, 0, 0, 0, 0], device='cuda:0')
+Worker 1 has targets: tensor([1, 1, 1, 0, 1], device='cuda:0')
+Worker 2 has targets: tensor([1, 1, 2, 1, 1], device='cuda:0')
+Worker 3 has targets: tensor([2, 2, 3, 2, 2], device='cuda:0')
+Worker 4 has targets: tensor([3, 3, 3, 3, 3], device='cuda:0')
+Worker 5 has targets: tensor([4, 4, 4, 4, 4], device='cuda:0')
+Worker 6 has targets: tensor([5, 5, 5, 5, 5], device='cuda:0')
+Worker 7 has targets: tensor([6, 6, 6, 5, 6], device='cuda:0')
+Worker 8 has targets: tensor([6, 7, 7, 6, 6], device='cuda:0')
+Worker 9 has targets: tensor([7, 7, 8, 7, 7], device='cuda:0')
+Worker 10 has targets: tensor([8, 8, 9, 8, 8], device='cuda:0')
+Worker 11 has targets: tensor([9, 9, 9, 9, 9], device='cuda:0')
+
+
+
+=== Log global consensus distance @ E1B0 ===
+consensus_distance=0.005
+
+
+
+=== Log clique consensus distance @ E1B0 ===
+clique1_consensus_distance=0.000
+clique2_consensus_distance=0.000
+
+
+
+=== Log mixing matrix @ E1B0 ===
+[[0.167 0.167 0.167 0.167 0.167 0.    0.    0.    0.    0.    0.167 0.   ]
+ [0.167 0.233 0.2   0.2   0.2   0.    0.    0.    0.    0.    0.    0.   ]
+ [0.167 0.2   0.233 0.2   0.2   0.    0.    0.    0.    0.    0.    0.   ]
+ [0.167 0.2   0.2   0.233 0.2   0.    0.    0.    0.    0.    0.    0.   ]
+ [0.167 0.2   0.2   0.2   0.233 0.    0.    0.    0.    0.    0.    0.   ]
+ [0.    0.    0.    0.    0.    0.233 0.2   0.2   0.2   0.167 0.    0.   ]
+ [0.    0.    0.    0.    0.    0.2   0.233 0.2   0.2   0.167 0.    0.   ]
+ [0.    0.    0.    0.    0.    0.2   0.2   0.233 0.2   0.167 0.    0.   ]
+ [0.    0.    0.    0.    0.    0.2   0.2   0.2   0.233 0.167 0.    0.   ]
+ [0.    0.    0.    0.    0.    0.167 0.167 0.167 0.167 0.167 0.167 0.   ]
+ [0.167 0.    0.    0.    0.    0.    0.    0.    0.    0.167 0.417 0.25 ]
+ [0.    0.    0.    0.    0.    0.    0.    0.    0.    0.    0.25  0.75 ]]
+
+
+[E 1B10 |   4224/60000 (  7%) ] Loss: 2.0190 top1= 44.0341
+
+=== Log global consensus distance @ E1B10 ===
+consensus_distance=0.060
+
+
+
+=== Log clique consensus distance @ E1B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.035
+
+
+[E 1B20 |   8064/60000 ( 13%) ] Loss: 1.5264 top1= 57.1023
+
+=== Log global consensus distance @ E1B20 ===
+consensus_distance=0.092
+
+
+
+=== Log clique consensus distance @ E1B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.158
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.0094 top1= 34.9159
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.8283 top1= 38.4615
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.4888 top1= 33.2131
+
+Train epoch 2
+[E 2B0  |    384/60000 (  1%) ] Loss: 1.0309 top1= 72.4432
+
+=== Log global consensus distance @ E2B0 ===
+consensus_distance=0.124
+
+
+
+=== Log clique consensus distance @ E2B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.300
+
+
+[E 2B10 |   4224/60000 (  7%) ] Loss: 0.7276 top1= 80.1136
+
+=== Log global consensus distance @ E2B10 ===
+consensus_distance=0.140
+
+
+
+=== Log clique consensus distance @ E2B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.371
+
+
+[E 2B20 |   8064/60000 ( 13%) ] Loss: 0.5253 top1= 86.0795
+
+=== Log global consensus distance @ E2B20 ===
+consensus_distance=0.143
+
+
+
+=== Log clique consensus distance @ E2B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.386
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.2187 top1= 66.8369
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.7712 top1= 39.5933
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.6014 top1= 37.2196
+
+Train epoch 3
+[E 3B0  |    384/60000 (  1%) ] Loss: 0.3088 top1= 93.1818
+
+=== Log global consensus distance @ E3B0 ===
+consensus_distance=0.139
+
+
+
+=== Log clique consensus distance @ E3B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.367
+
+
+[E 3B10 |   4224/60000 (  7%) ] Loss: 0.3006 top1= 91.7614
+
+=== Log global consensus distance @ E3B10 ===
+consensus_distance=0.128
+
+
+
+=== Log clique consensus distance @ E3B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.320
+
+
+[E 3B20 |   8064/60000 ( 13%) ] Loss: 0.2891 top1= 91.4773
+
+=== Log global consensus distance @ E3B20 ===
+consensus_distance=0.116
+
+
+
+=== Log clique consensus distance @ E3B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.267
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.8157 top1= 74.3089
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.1630 top1= 44.1607
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.2508 top1= 42.5381
+
+Train epoch 4
+[E 4B0  |    384/60000 (  1%) ] Loss: 0.1838 top1= 93.7500
+
+=== Log global consensus distance @ E4B0 ===
+consensus_distance=0.105
+
+
+
+=== Log clique consensus distance @ E4B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.222
+
+
+[E 4B10 |   4224/60000 (  7%) ] Loss: 0.2195 top1= 94.0341
+
+=== Log global consensus distance @ E4B10 ===
+consensus_distance=0.097
+
+
+
+=== Log clique consensus distance @ E4B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.186
+
+
+[E 4B20 |   8064/60000 ( 13%) ] Loss: 0.2175 top1= 93.1818
+
+=== Log global consensus distance @ E4B20 ===
+consensus_distance=0.090
+
+
+
+=== Log clique consensus distance @ E4B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.155
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.6511 top1= 76.6226
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.8832 top1= 51.0116
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.9829 top1= 50.5008
+
+Train epoch 5
+[E 5B0  |    384/60000 (  1%) ] Loss: 0.1415 top1= 95.4545
+
+=== Log global consensus distance @ E5B0 ===
+consensus_distance=0.085
+
+
+
+=== Log clique consensus distance @ E5B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.134
+
+
+[E 5B10 |   4224/60000 (  7%) ] Loss: 0.1821 top1= 94.6023
+
+=== Log global consensus distance @ E5B10 ===
+consensus_distance=0.081
+
+
+
+=== Log clique consensus distance @ E5B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.118
+
+
+[E 5B20 |   8064/60000 ( 13%) ] Loss: 0.1800 top1= 93.7500
+
+=== Log global consensus distance @ E5B20 ===
+consensus_distance=0.078
+
+
+
+=== Log clique consensus distance @ E5B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.104
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.5658 top1= 78.6258
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.7220 top1= 55.3185
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.8565 top1= 53.4054
+
+Train epoch 6
+[E 6B0  |    384/60000 (  1%) ] Loss: 0.1100 top1= 96.3068
+
+=== Log global consensus distance @ E6B0 ===
+consensus_distance=0.076
+
+
+
+=== Log clique consensus distance @ E6B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.096
+
+
+[E 6B10 |   4224/60000 (  7%) ] Loss: 0.1542 top1= 94.8864
+
+=== Log global consensus distance @ E6B10 ===
+consensus_distance=0.074
+
+
+
+=== Log clique consensus distance @ E6B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.088
+
+
+[E 6B20 |   8064/60000 ( 13%) ] Loss: 0.1501 top1= 94.0341
+
+=== Log global consensus distance @ E6B20 ===
+consensus_distance=0.073
+
+
+
+=== Log clique consensus distance @ E6B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.081
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.5079 top1= 81.0497
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.6345 top1= 58.6939
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.8190 top1= 55.1182
+
+Train epoch 7
+[E 7B0  |    384/60000 (  1%) ] Loss: 0.0838 top1= 97.1591
+
+=== Log global consensus distance @ E7B0 ===
+consensus_distance=0.072
+
+
+
+=== Log clique consensus distance @ E7B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.079
+
+
+[E 7B10 |   4224/60000 (  7%) ] Loss: 0.1272 top1= 95.4545
+
+=== Log global consensus distance @ E7B10 ===
+consensus_distance=0.071
+
+
+
+=== Log clique consensus distance @ E7B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.073
+
+
+[E 7B20 |   8064/60000 ( 13%) ] Loss: 0.1227 top1= 94.8864
+
+=== Log global consensus distance @ E7B20 ===
+consensus_distance=0.070
+
+
+
+=== Log clique consensus distance @ E7B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.069
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.4747 top1= 83.1631
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.6104 top1= 61.2981
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.8066 top1= 56.6106
+
+Train epoch 8
+[E 8B0  |    384/60000 (  1%) ] Loss: 0.0623 top1= 98.5795
+
+=== Log global consensus distance @ E8B0 ===
+consensus_distance=0.070
+
+
+
+=== Log clique consensus distance @ E8B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.070
+
+
+[E 8B10 |   4224/60000 (  7%) ] Loss: 0.0993 top1= 97.4432
+
+=== Log global consensus distance @ E8B10 ===
+consensus_distance=0.069
+
+
+
+=== Log clique consensus distance @ E8B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.065
+
+
+[E 8B20 |   8064/60000 ( 13%) ] Loss: 0.0959 top1= 96.8750
+
+=== Log global consensus distance @ E8B20 ===
+consensus_distance=0.068
+
+
+
+=== Log clique consensus distance @ E8B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.062
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.4614 top1= 84.7456
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.6103 top1= 63.8321
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.8286 top1= 58.3433
+
+Train epoch 9
+[E 9B0  |    384/60000 (  1%) ] Loss: 0.0475 top1= 99.1477
+
+=== Log global consensus distance @ E9B0 ===
+consensus_distance=0.069
+
+
+
+=== Log clique consensus distance @ E9B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.064
+
+
+[E 9B10 |   4224/60000 (  7%) ] Loss: 0.0752 top1= 98.0114
+
+=== Log global consensus distance @ E9B10 ===
+consensus_distance=0.068
+
+
+
+=== Log clique consensus distance @ E9B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.059
+
+
+[E 9B20 |   8064/60000 ( 13%) ] Loss: 0.0730 top1= 97.7273
+
+=== Log global consensus distance @ E9B20 ===
+consensus_distance=0.067
+
+
+
+=== Log clique consensus distance @ E9B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.058
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.4571 top1= 85.8474
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.6407 top1= 65.4647
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.8888 top1= 59.7957
+
+Train epoch 10
+[E10B0  |    384/60000 (  1%) ] Loss: 0.0352 top1= 99.1477
+
+=== Log global consensus distance @ E10B0 ===
+consensus_distance=0.068
+
+
+
+=== Log clique consensus distance @ E10B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.059
+
+
+[E10B10 |   4224/60000 (  7%) ] Loss: 0.0553 top1= 98.5795
+
+=== Log global consensus distance @ E10B10 ===
+consensus_distance=0.067
+
+
+
+=== Log clique consensus distance @ E10B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.055
+
+
+[E10B20 |   8064/60000 ( 13%) ] Loss: 0.0604 top1= 98.0114
+
+=== Log global consensus distance @ E10B20 ===
+consensus_distance=0.067
+
+
+
+=== Log clique consensus distance @ E10B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.054
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.4637 top1= 86.6987
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.7112 top1= 67.0974
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.9532 top1= 61.5184
+
+Train epoch 11
+[E11B0  |    384/60000 (  1%) ] Loss: 0.0260 top1= 99.4318
+
+=== Log global consensus distance @ E11B0 ===
+consensus_distance=0.067
+
+
+
+=== Log clique consensus distance @ E11B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.056
+
+
+[E11B10 |   4224/60000 (  7%) ] Loss: 0.0379 top1= 98.8636
+
+=== Log global consensus distance @ E11B10 ===
+consensus_distance=0.066
+
+
+
+=== Log clique consensus distance @ E11B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.052
+
+
+[E11B20 |   8064/60000 ( 13%) ] Loss: 0.0515 top1= 98.0114
+
+=== Log global consensus distance @ E11B20 ===
+consensus_distance=0.066
+
+
+
+=== Log clique consensus distance @ E11B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.051
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.4899 top1= 86.9091
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.8979 top1= 67.0573
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=1.9577 top1= 63.9523
+
+Train epoch 12
+[E12B0  |    384/60000 (  1%) ] Loss: 0.0237 top1= 98.8636
+
+=== Log global consensus distance @ E12B0 ===
+consensus_distance=0.066
+
+
+
+=== Log clique consensus distance @ E12B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.053
+
+
+[E12B10 |   4224/60000 (  7%) ] Loss: 0.0189 top1= 99.4318
+
+=== Log global consensus distance @ E12B10 ===
+consensus_distance=0.065
+
+
+
+=== Log clique consensus distance @ E12B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.049
+
+
+[E12B20 |   8064/60000 ( 13%) ] Loss: 0.0458 top1= 98.2955
+
+=== Log global consensus distance @ E12B20 ===
+consensus_distance=0.065
+
+
+
+=== Log clique consensus distance @ E12B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.049
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.5170 top1= 87.4499
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.0187 top1= 68.2392
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.1525 top1= 64.6434
+
+Train epoch 13
+[E13B0  |    384/60000 (  1%) ] Loss: 0.0195 top1= 99.1477
+
+=== Log global consensus distance @ E13B0 ===
+consensus_distance=0.066
+
+
+
+=== Log clique consensus distance @ E13B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.053
+
+
+[E13B10 |   4224/60000 (  7%) ] Loss: 0.0145 top1=100.0000
+
+=== Log global consensus distance @ E13B10 ===
+consensus_distance=0.065
+
+
+
+=== Log clique consensus distance @ E13B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.048
+
+
+[E13B20 |   8064/60000 ( 13%) ] Loss: 0.0302 top1= 98.5795
+
+=== Log global consensus distance @ E13B20 ===
+consensus_distance=0.065
+
+
+
+=== Log clique consensus distance @ E13B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.049
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.5653 top1= 87.7704
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.1047 top1= 69.4411
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.4748 top1= 64.3630
+
+Train epoch 14
+[E14B0  |    384/60000 (  1%) ] Loss: 0.0283 top1= 99.4318
+
+=== Log global consensus distance @ E14B0 ===
+consensus_distance=0.066
+
+
+
+=== Log clique consensus distance @ E14B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.052
+
+
+[E14B10 |   4224/60000 (  7%) ] Loss: 0.0086 top1=100.0000
+
+=== Log global consensus distance @ E14B10 ===
+consensus_distance=0.065
+
+
+
+=== Log clique consensus distance @ E14B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.048
+
+
+[E14B20 |   8064/60000 ( 13%) ] Loss: 0.0405 top1= 98.2955
+
+=== Log global consensus distance @ E14B20 ===
+consensus_distance=0.065
+
+
+
+=== Log clique consensus distance @ E14B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.050
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.6327 top1= 87.7604
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.4403 top1= 69.3810
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.7474 top1= 64.9639
+
+Train epoch 15
+[E15B0  |    384/60000 (  1%) ] Loss: 0.0241 top1= 99.1477
+
+=== Log global consensus distance @ E15B0 ===
+consensus_distance=0.067
+
+
+
+=== Log clique consensus distance @ E15B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.056
+
+
+[E15B10 |   4224/60000 (  7%) ] Loss: 0.0084 top1= 99.7159
+
+=== Log global consensus distance @ E15B10 ===
+consensus_distance=0.067
+
+
+
+=== Log clique consensus distance @ E15B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.056
+
+
+[E15B20 |   8064/60000 ( 13%) ] Loss: 0.0196 top1= 99.4318
+
+=== Log global consensus distance @ E15B20 ===
+consensus_distance=0.068
+
+
+
+=== Log clique consensus distance @ E15B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.060
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.6987 top1= 87.8105
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.4339 top1= 71.6346
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=3.1414 top1= 64.2829
+
+Train epoch 16
+[E16B0  |    384/60000 (  1%) ] Loss: 0.0186 top1= 99.4318
+
+=== Log global consensus distance @ E16B0 ===
+consensus_distance=0.070
+
+
+
+=== Log clique consensus distance @ E16B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.067
+
+
+[E16B10 |   4224/60000 (  7%) ] Loss: 0.0181 top1= 99.4318
+
+=== Log global consensus distance @ E16B10 ===
+consensus_distance=0.071
+
+
+
+=== Log clique consensus distance @ E16B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.075
+
+
+[E16B20 |   8064/60000 ( 13%) ] Loss: 0.0308 top1= 98.5795
+
+=== Log global consensus distance @ E16B20 ===
+consensus_distance=0.073
+
+
+
+=== Log clique consensus distance @ E16B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.082
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.8061 top1= 87.9006
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=2.8691 top1= 71.7348
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=3.1174 top1= 67.0272
+
+Train epoch 17
+[E17B0  |    384/60000 (  1%) ] Loss: 0.0371 top1= 98.5795
+
+=== Log global consensus distance @ E17B0 ===
+consensus_distance=0.073
+
+
+
+=== Log clique consensus distance @ E17B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.081
+
+
+[E17B10 |   4224/60000 (  7%) ] Loss: 0.0618 top1= 97.7273
+
+=== Log global consensus distance @ E17B10 ===
+consensus_distance=0.074
+
+
+
+=== Log clique consensus distance @ E17B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.085
+
+
+[E17B20 |   8064/60000 ( 13%) ] Loss: 0.1165 top1= 98.2955
+
+=== Log global consensus distance @ E17B20 ===
+consensus_distance=0.073
+
+
+
+=== Log clique consensus distance @ E17B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.079
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.9281 top1= 86.5785
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=3.7292 top1= 66.0657
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=3.5436 top1= 66.9471
+
+Train epoch 18
+[E18B0  |    384/60000 (  1%) ] Loss: 0.0339 top1= 99.4318
+
+=== Log global consensus distance @ E18B0 ===
+consensus_distance=0.074
+
+
+
+=== Log clique consensus distance @ E18B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.084
+
+
+[E18B10 |   4224/60000 (  7%) ] Loss: 0.0400 top1= 98.5795
+
+=== Log global consensus distance @ E18B10 ===
+consensus_distance=0.075
+
+
+
+=== Log clique consensus distance @ E18B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.088
+
+
+[E18B20 |   8064/60000 ( 13%) ] Loss: 0.0521 top1= 98.2955
+
+=== Log global consensus distance @ E18B20 ===
+consensus_distance=0.077
+
+
+
+=== Log clique consensus distance @ E18B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.098
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=0.9065 top1= 88.2011
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=4.3024 top1= 66.6867
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=3.7115 top1= 68.2192
+
+Train epoch 19
+[E19B0  |    384/60000 (  1%) ] Loss: 0.0107 top1= 99.7159
+
+=== Log global consensus distance @ E19B0 ===
+consensus_distance=0.078
+
+
+
+=== Log clique consensus distance @ E19B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.101
+
+
+[E19B10 |   4224/60000 (  7%) ] Loss: 0.0687 top1= 97.7273
+
+=== Log global consensus distance @ E19B10 ===
+consensus_distance=0.080
+
+
+
+=== Log clique consensus distance @ E19B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.113
+
+
+[E19B20 |   8064/60000 ( 13%) ] Loss: 0.0982 top1= 98.2955
+
+=== Log global consensus distance @ E19B20 ===
+consensus_distance=0.079
+
+
+
+=== Log clique consensus distance @ E19B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.107
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.0050 top1= 88.3213
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=4.8562 top1= 67.5581
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=3.8300 top1= 68.5998
+
+Train epoch 20
+[E20B0  |    384/60000 (  1%) ] Loss: 0.0793 top1= 98.5795
+
+=== Log global consensus distance @ E20B0 ===
+consensus_distance=0.082
+
+
+
+=== Log clique consensus distance @ E20B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.118
+
+
+[E20B10 |   4224/60000 (  7%) ] Loss: 0.0864 top1= 98.8636
+
+=== Log global consensus distance @ E20B10 ===
+consensus_distance=0.090
+
+
+
+=== Log clique consensus distance @ E20B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.154
+
+
+[E20B20 |   8064/60000 ( 13%) ] Loss: 0.1166 top1= 97.7273
+
+=== Log global consensus distance @ E20B20 ===
+consensus_distance=0.091
+
+
+
+=== Log clique consensus distance @ E20B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.155
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.3580 top1= 85.4167
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=5.4460 top1= 67.4679
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=6.3347 top1= 61.7989
+
+Train epoch 21
+[E21B0  |    384/60000 (  1%) ] Loss: 0.0394 top1= 98.5795
+
+=== Log global consensus distance @ E21B0 ===
+consensus_distance=0.091
+
+
+
+=== Log clique consensus distance @ E21B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.154
+
+
+[E21B10 |   4224/60000 (  7%) ] Loss: 0.1406 top1= 98.2955
+
+=== Log global consensus distance @ E21B10 ===
+consensus_distance=0.093
+
+
+
+=== Log clique consensus distance @ E21B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.164
+
+
+[E21B20 |   8064/60000 ( 13%) ] Loss: 0.1707 top1= 98.0114
+
+=== Log global consensus distance @ E21B20 ===
+consensus_distance=0.091
+
+
+
+=== Log clique consensus distance @ E21B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.154
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.2952 top1= 87.6603
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=8.0205 top1= 63.7220
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=6.2432 top1= 63.6619
+
+Train epoch 22
+[E22B0  |    384/60000 (  1%) ] Loss: 0.0935 top1= 98.2955
+
+=== Log global consensus distance @ E22B0 ===
+consensus_distance=0.098
+
+
+
+=== Log clique consensus distance @ E22B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.176
+
+
+[E22B10 |   4224/60000 (  7%) ] Loss: 0.1638 top1= 97.4432
+
+=== Log global consensus distance @ E22B10 ===
+consensus_distance=0.099
+
+
+
+=== Log clique consensus distance @ E22B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.184
+
+
+[E22B20 |   8064/60000 ( 13%) ] Loss: 0.0436 top1= 98.5795
+
+=== Log global consensus distance @ E22B20 ===
+consensus_distance=0.098
+
+
+
+=== Log clique consensus distance @ E22B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.184
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.2795 top1= 89.3429
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=7.6412 top1= 67.3177
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=6.2384 top1= 65.3646
+
+Train epoch 23
+[E23B0  |    384/60000 (  1%) ] Loss: 0.1515 top1= 98.2955
+
+=== Log global consensus distance @ E23B0 ===
+consensus_distance=0.101
+
+
+
+=== Log clique consensus distance @ E23B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.195
+
+
+[E23B10 |   4224/60000 (  7%) ] Loss: 0.0925 top1= 98.5795
+
+=== Log global consensus distance @ E23B10 ===
+consensus_distance=0.098
+
+
+
+=== Log clique consensus distance @ E23B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.187
+
+
+[E23B20 |   8064/60000 ( 13%) ] Loss: 0.1725 top1= 97.4432
+
+=== Log global consensus distance @ E23B20 ===
+consensus_distance=0.101
+
+
+
+=== Log clique consensus distance @ E23B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.200
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.7978 top1= 85.2965
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=9.2999 top1= 63.2011
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=8.0250 top1= 64.6034
+
+Train epoch 24
+[E24B0  |    384/60000 (  1%) ] Loss: 0.0926 top1= 98.5795
+
+=== Log global consensus distance @ E24B0 ===
+consensus_distance=0.107
+
+
+
+=== Log clique consensus distance @ E24B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.225
+
+
+[E24B10 |   4224/60000 (  7%) ] Loss: 0.0491 top1= 98.8636
+
+=== Log global consensus distance @ E24B10 ===
+consensus_distance=0.105
+
+
+
+=== Log clique consensus distance @ E24B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.219
+
+
+[E24B20 |   8064/60000 ( 13%) ] Loss: 0.0422 top1= 99.4318
+
+=== Log global consensus distance @ E24B20 ===
+consensus_distance=0.106
+
+
+
+=== Log clique consensus distance @ E24B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.219
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.7533 top1= 87.7003
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=8.6212 top1= 68.3293
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=4.4095 top1= 74.9199
+
+Train epoch 25
+[E25B0  |    384/60000 (  1%) ] Loss: 0.2116 top1= 96.8750
+
+=== Log global consensus distance @ E25B0 ===
+consensus_distance=0.099
+
+
+
+=== Log clique consensus distance @ E25B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.189
+
+
+[E25B10 |   4224/60000 (  7%) ] Loss: 0.0039 top1= 99.7159
+
+=== Log global consensus distance @ E25B10 ===
+consensus_distance=0.098
+
+
+
+=== Log clique consensus distance @ E25B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.187
+
+
+[E25B20 |   8064/60000 ( 13%) ] Loss: 0.0648 top1= 98.5795
+
+=== Log global consensus distance @ E25B20 ===
+consensus_distance=0.102
+
+
+
+=== Log clique consensus distance @ E25B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.203
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.9769 top1= 87.4099
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=11.1510 top1= 65.1843
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=7.3696 top1= 66.9271
+
+Train epoch 26
+[E26B0  |    384/60000 (  1%) ] Loss: 0.1420 top1= 98.5795
+
+=== Log global consensus distance @ E26B0 ===
+consensus_distance=0.103
+
+
+
+=== Log clique consensus distance @ E26B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.207
+
+
+[E26B10 |   4224/60000 (  7%) ] Loss: 0.1768 top1= 98.0114
+
+=== Log global consensus distance @ E26B10 ===
+consensus_distance=0.100
+
+
+
+=== Log clique consensus distance @ E26B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.194
+
+
+[E26B20 |   8064/60000 ( 13%) ] Loss: 0.0709 top1= 98.5795
+
+=== Log global consensus distance @ E26B20 ===
+consensus_distance=0.099
+
+
+
+=== Log clique consensus distance @ E26B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.192
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.9381 top1= 88.2812
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=7.3162 top1= 72.2456
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=6.7508 top1= 70.8934
+
+Train epoch 27
+[E27B0  |    384/60000 (  1%) ] Loss: 0.0346 top1= 99.4318
+
+=== Log global consensus distance @ E27B0 ===
+consensus_distance=0.101
+
+
+
+=== Log clique consensus distance @ E27B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.201
+
+
+[E27B10 |   4224/60000 (  7%) ] Loss: 0.1421 top1= 98.2955
+
+=== Log global consensus distance @ E27B10 ===
+consensus_distance=0.107
+
+
+
+=== Log clique consensus distance @ E27B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.227
+
+
+[E27B20 |   8064/60000 ( 13%) ] Loss: 0.0526 top1= 98.8636
+
+=== Log global consensus distance @ E27B20 ===
+consensus_distance=0.105
+
+
+
+=== Log clique consensus distance @ E27B20 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.217
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.7112 top1= 90.8754
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=7.1968 top1= 73.5176
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=7.1370 top1= 71.0337
+
+Train epoch 28
+[E28B0  |    384/60000 (  1%) ] Loss: 0.1965 top1= 98.5795
+
+=== Log global consensus distance @ E28B0 ===
+consensus_distance=0.105
+
+
+
+=== Log clique consensus distance @ E28B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.220
+
+
+[E28B10 |   4224/60000 (  7%) ] Loss: 0.0638 top1= 99.1477
+
+=== Log global consensus distance @ E28B10 ===
+consensus_distance=0.109
+
+
+
+=== Log clique consensus distance @ E28B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.234
+
+
+[E28B20 |   8064/60000 ( 13%) ] Loss: 0.0908 top1= 99.1477
+
+=== Log global consensus distance @ E28B20 ===
+consensus_distance=0.112
+
+
+
+=== Log clique consensus distance @ E28B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.245
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.0864 top1= 89.2628
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=9.1067 top1= 71.8049
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=10.8029 top1= 66.0156
+
+Train epoch 29
+[E29B0  |    384/60000 (  1%) ] Loss: 0.0604 top1= 99.1477
+
+=== Log global consensus distance @ E29B0 ===
+consensus_distance=0.112
+
+
+
+=== Log clique consensus distance @ E29B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.242
+
+
+[E29B10 |   4224/60000 (  7%) ] Loss: 0.0506 top1= 99.1477
+
+=== Log global consensus distance @ E29B10 ===
+consensus_distance=0.111
+
+
+
+=== Log clique consensus distance @ E29B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.242
+
+
+[E29B20 |   8064/60000 ( 13%) ] Loss: 0.1735 top1= 98.8636
+
+=== Log global consensus distance @ E29B20 ===
+consensus_distance=0.105
+
+
+
+=== Log clique consensus distance @ E29B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.212
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.7119 top1= 87.5000
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=12.4169 top1= 68.8301
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=8.4752 top1= 72.5861
+
+Train epoch 30
+[E30B0  |    384/60000 (  1%) ] Loss: 0.1360 top1= 98.2955
+
+=== Log global consensus distance @ E30B0 ===
+consensus_distance=0.113
+
+
+
+=== Log clique consensus distance @ E30B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.251
+
+
+[E30B10 |   4224/60000 (  7%) ] Loss: 0.0245 top1= 99.7159
+
+=== Log global consensus distance @ E30B10 ===
+consensus_distance=0.119
+
+
+
+=== Log clique consensus distance @ E30B10 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.278
+
+
+[E30B20 |   8064/60000 ( 13%) ] Loss: 0.1004 top1= 99.1477
+
+=== Log global consensus distance @ E30B20 ===
+consensus_distance=0.115
+
+
+
+=== Log clique consensus distance @ E30B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.257
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.2727 top1= 89.8137
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=10.3981 top1= 71.3542
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=11.9414 top1= 66.9471
+
+Train epoch 31
+[E31B0  |    384/60000 (  1%) ] Loss: 0.1022 top1= 98.8636
+
+=== Log global consensus distance @ E31B0 ===
+consensus_distance=0.112
+
+
+
+=== Log clique consensus distance @ E31B0 ===
+clique1_consensus_distance=0.003
+clique2_consensus_distance=0.247
+
+
+[E31B10 |   4224/60000 (  7%) ] Loss: 0.0779 top1= 98.8636
+
+=== Log global consensus distance @ E31B10 ===
+consensus_distance=0.121
+
+
+
+=== Log clique consensus distance @ E31B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.280
+
+
+[E31B20 |   8064/60000 ( 13%) ] Loss: 0.0956 top1= 98.8636
+
+=== Log global consensus distance @ E31B20 ===
+consensus_distance=0.129
+
+
+
+=== Log clique consensus distance @ E31B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.319
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.5461 top1= 89.7636
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=8.5952 top1= 75.9515
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=19.1826 top1= 58.1631
+
+Train epoch 32
+[E32B0  |    384/60000 (  1%) ] Loss: 0.0724 top1= 99.4318
+
+=== Log global consensus distance @ E32B0 ===
+consensus_distance=0.137
+
+
+
+=== Log clique consensus distance @ E32B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.353
+
+
+[E32B10 |   4224/60000 (  7%) ] Loss: 0.1308 top1= 99.4318
+
+=== Log global consensus distance @ E32B10 ===
+consensus_distance=0.141
+
+
+
+=== Log clique consensus distance @ E32B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.367
+
+
+[E32B20 |   8064/60000 ( 13%) ] Loss: 0.0705 top1= 99.4318
+
+=== Log global consensus distance @ E32B20 ===
+consensus_distance=0.147
+
+
+
+=== Log clique consensus distance @ E32B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.388
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.9583 top1= 88.1410
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=10.3481 top1= 73.5677
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=12.0586 top1= 68.0789
+
+Train epoch 33
+[E33B0  |    384/60000 (  1%) ] Loss: 0.0388 top1= 99.4318
+
+=== Log global consensus distance @ E33B0 ===
+consensus_distance=0.145
+
+
+
+=== Log clique consensus distance @ E33B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.383
+
+
+[E33B10 |   4224/60000 (  7%) ] Loss: 0.0227 top1= 99.1477
+
+=== Log global consensus distance @ E33B10 ===
+consensus_distance=0.145
+
+
+
+=== Log clique consensus distance @ E33B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.380
+
+
+[E33B20 |   8064/60000 ( 13%) ] Loss: 0.2118 top1= 98.0114
+
+=== Log global consensus distance @ E33B20 ===
+consensus_distance=0.140
+
+
+
+=== Log clique consensus distance @ E33B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.360
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=2.6063 top1= 90.4848
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=13.0902 top1= 72.2256
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=18.1546 top1= 62.1995
+
+Train epoch 34
+[E34B0  |    384/60000 (  1%) ] Loss: 0.0016 top1=100.0000
+
+=== Log global consensus distance @ E34B0 ===
+consensus_distance=0.138
+
+
+
+=== Log clique consensus distance @ E34B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.351
+
+
+[E34B10 |   4224/60000 (  7%) ] Loss: 0.1137 top1= 99.4318
+
+=== Log global consensus distance @ E34B10 ===
+consensus_distance=0.141
+
+
+
+=== Log clique consensus distance @ E34B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.372
+
+
+[E34B20 |   8064/60000 ( 13%) ] Loss: 0.1559 top1= 98.8636
+
+=== Log global consensus distance @ E34B20 ===
+consensus_distance=0.150
+
+
+
+=== Log clique consensus distance @ E34B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.408
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=3.1358 top1= 88.8522
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=11.6233 top1= 73.8181
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=11.6461 top1= 71.4543
+
+Train epoch 35
+[E35B0  |    384/60000 (  1%) ] Loss: 0.0870 top1= 98.8636
+
+=== Log global consensus distance @ E35B0 ===
+consensus_distance=0.156
+
+
+
+=== Log clique consensus distance @ E35B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.429
+
+
+[E35B10 |   4224/60000 (  7%) ] Loss: 0.0853 top1= 98.8636
+
+=== Log global consensus distance @ E35B10 ===
+consensus_distance=0.157
+
+
+
+=== Log clique consensus distance @ E35B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.439
+
+
+[E35B20 |   8064/60000 ( 13%) ] Loss: 0.1676 top1= 99.1477
+
+=== Log global consensus distance @ E35B20 ===
+consensus_distance=0.147
+
+
+
+=== Log clique consensus distance @ E35B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.395
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=4.5824 top1= 86.5485
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=16.7610 top1= 69.7316
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=17.9681 top1= 70.5028
+
+Train epoch 36
+[E36B0  |    384/60000 (  1%) ] Loss: 0.4120 top1= 99.1477
+
+=== Log global consensus distance @ E36B0 ===
+consensus_distance=0.161
+
+
+
+=== Log clique consensus distance @ E36B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.445
+
+
+[E36B10 |   4224/60000 (  7%) ] Loss: 0.1124 top1= 99.1477
+
+=== Log global consensus distance @ E36B10 ===
+consensus_distance=0.160
+
+
+
+=== Log clique consensus distance @ E36B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.444
+
+
+[E36B20 |   8064/60000 ( 13%) ] Loss: 0.0083 top1= 99.4318
+
+=== Log global consensus distance @ E36B20 ===
+consensus_distance=0.154
+
+
+
+=== Log clique consensus distance @ E36B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.426
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=3.4759 top1= 90.0942
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=10.9475 top1= 77.5240
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=15.7521 top1= 70.2624
+
+Train epoch 37
+[E37B0  |    384/60000 (  1%) ] Loss: 0.1242 top1= 99.1477
+
+=== Log global consensus distance @ E37B0 ===
+consensus_distance=0.160
+
+
+
+=== Log clique consensus distance @ E37B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.437
+
+
+[E37B10 |   4224/60000 (  7%) ] Loss: 0.0990 top1= 99.7159
+
+=== Log global consensus distance @ E37B10 ===
+consensus_distance=0.170
+
+
+
+=== Log clique consensus distance @ E37B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.494
+
+
+[E37B20 |   8064/60000 ( 13%) ] Loss: 0.0635 top1= 99.4318
+
+=== Log global consensus distance @ E37B20 ===
+consensus_distance=0.167
+
+
+
+=== Log clique consensus distance @ E37B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.480
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=4.3290 top1= 88.2111
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=9.7418 top1= 79.9679
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=23.2667 top1= 63.1711
+
+Train epoch 38
+[E38B0  |    384/60000 (  1%) ] Loss: 0.1814 top1= 99.4318
+
+=== Log global consensus distance @ E38B0 ===
+consensus_distance=0.168
+
+
+
+=== Log clique consensus distance @ E38B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.472
+
+
+[E38B10 |   4224/60000 (  7%) ] Loss: 0.2132 top1= 98.8636
+
+=== Log global consensus distance @ E38B10 ===
+consensus_distance=0.177
+
+
+
+=== Log clique consensus distance @ E38B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.524
+
+
+[E38B20 |   8064/60000 ( 13%) ] Loss: 0.1951 top1= 99.1477
+
+=== Log global consensus distance @ E38B20 ===
+consensus_distance=0.182
+
+
+
+=== Log clique consensus distance @ E38B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.538
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=4.5875 top1= 87.9607
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=12.6115 top1= 77.1034
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=21.6816 top1= 66.0056
+
+Train epoch 39
+[E39B0  |    384/60000 (  1%) ] Loss: 0.1027 top1= 99.1477
+
+=== Log global consensus distance @ E39B0 ===
+consensus_distance=0.181
+
+
+
+=== Log clique consensus distance @ E39B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.530
+
+
+[E39B10 |   4224/60000 (  7%) ] Loss: 0.0696 top1= 99.4318
+
+=== Log global consensus distance @ E39B10 ===
+consensus_distance=0.173
+
+
+
+=== Log clique consensus distance @ E39B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.509
+
+
+[E39B20 |   8064/60000 ( 13%) ] Loss: 0.0221 top1= 99.4318
+
+=== Log global consensus distance @ E39B20 ===
+consensus_distance=0.170
+
+
+
+=== Log clique consensus distance @ E39B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.483
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=4.7868 top1= 88.4615
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=19.8145 top1= 72.3257
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=25.0534 top1= 63.8021
+
+Train epoch 40
+[E40B0  |    384/60000 (  1%) ] Loss: 0.0471 top1= 99.7159
+
+=== Log global consensus distance @ E40B0 ===
+consensus_distance=0.158
+
+
+
+=== Log clique consensus distance @ E40B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.435
+
+
+[E40B10 |   4224/60000 (  7%) ] Loss: 0.1281 top1= 99.4318
+
+=== Log global consensus distance @ E40B10 ===
+consensus_distance=0.147
+
+
+
+=== Log clique consensus distance @ E40B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.368
+
+
+[E40B20 |   8064/60000 ( 13%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E40B20 ===
+consensus_distance=0.145
+
+
+
+=== Log clique consensus distance @ E40B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.386
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=4.2948 top1= 90.9155
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=26.6323 top1= 68.2091
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=16.5312 top1= 72.7764
+
+Train epoch 41
+[E41B0  |    384/60000 (  1%) ] Loss: 0.0002 top1=100.0000
+
+=== Log global consensus distance @ E41B0 ===
+consensus_distance=0.168
+
+
+
+=== Log clique consensus distance @ E41B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.472
+
+
+[E41B10 |   4224/60000 (  7%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E41B10 ===
+consensus_distance=0.167
+
+
+
+=== Log clique consensus distance @ E41B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.470
+
+
+[E41B20 |   8064/60000 ( 13%) ] Loss: 0.0330 top1= 99.7159
+
+=== Log global consensus distance @ E41B20 ===
+consensus_distance=0.163
+
+
+
+=== Log clique consensus distance @ E41B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.444
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=6.5747 top1= 86.5585
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=29.9597 top1= 67.5180
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=25.7966 top1= 67.4579
+
+Train epoch 42
+[E42B0  |    384/60000 (  1%) ] Loss: 0.0181 top1= 99.4318
+
+=== Log global consensus distance @ E42B0 ===
+consensus_distance=0.172
+
+
+
+=== Log clique consensus distance @ E42B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.490
+
+
+[E42B10 |   4224/60000 (  7%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E42B10 ===
+consensus_distance=0.174
+
+
+
+=== Log clique consensus distance @ E42B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.510
+
+
+[E42B20 |   8064/60000 ( 13%) ] Loss: 0.0052 top1= 99.7159
+
+=== Log global consensus distance @ E42B20 ===
+consensus_distance=0.186
+
+
+
+=== Log clique consensus distance @ E42B20 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.541
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=4.4479 top1= 91.3161
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=14.6371 top1= 80.4788
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=33.7052 top1= 64.1226
+
+Train epoch 43
+[E43B0  |    384/60000 (  1%) ] Loss: 0.1961 top1= 98.8636
+
+=== Log global consensus distance @ E43B0 ===
+consensus_distance=0.178
+
+
+
+=== Log clique consensus distance @ E43B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.533
+
+
+[E43B10 |   4224/60000 (  7%) ] Loss: 0.1449 top1= 99.7159
+
+=== Log global consensus distance @ E43B10 ===
+consensus_distance=0.180
+
+
+
+=== Log clique consensus distance @ E43B10 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.524
+
+
+[E43B20 |   8064/60000 ( 13%) ] Loss: 0.7834 top1= 98.8636
+
+=== Log global consensus distance @ E43B20 ===
+consensus_distance=0.205
+
+
+
+=== Log clique consensus distance @ E43B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.640
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=5.9522 top1= 88.5517
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=15.1225 top1= 79.3770
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=37.0685 top1= 63.3914
+
+Train epoch 44
+[E44B0  |    384/60000 (  1%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E44B0 ===
+consensus_distance=0.203
+
+
+
+=== Log clique consensus distance @ E44B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.645
+
+
+[E44B10 |   4224/60000 (  7%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E44B10 ===
+consensus_distance=0.203
+
+
+
+=== Log clique consensus distance @ E44B10 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.609
+
+
+[E44B20 |   8064/60000 ( 13%) ] Loss: 0.0002 top1=100.0000
+
+=== Log global consensus distance @ E44B20 ===
+consensus_distance=0.205
+
+
+
+=== Log clique consensus distance @ E44B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.638
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=5.0707 top1= 90.9255
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=28.0220 top1= 69.6114
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=34.2105 top1= 63.7019
+
+Train epoch 45
+[E45B0  |    384/60000 (  1%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E45B0 ===
+consensus_distance=0.193
+
+
+
+=== Log clique consensus distance @ E45B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.588
+
+
+[E45B10 |   4224/60000 (  7%) ] Loss: 0.1222 top1= 99.4318
+
+=== Log global consensus distance @ E45B10 ===
+consensus_distance=0.174
+
+
+
+=== Log clique consensus distance @ E45B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.504
+
+
+[E45B20 |   8064/60000 ( 13%) ] Loss: 0.0349 top1= 99.7159
+
+=== Log global consensus distance @ E45B20 ===
+consensus_distance=0.188
+
+
+
+=== Log clique consensus distance @ E45B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.569
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=5.3220 top1= 91.1759
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=18.7877 top1= 77.6042
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=25.4412 top1= 69.3510
+
+Train epoch 46
+[E46B0  |    384/60000 (  1%) ] Loss: 0.0004 top1=100.0000
+
+=== Log global consensus distance @ E46B0 ===
+consensus_distance=0.195
+
+
+
+=== Log clique consensus distance @ E46B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.591
+
+
+[E46B10 |   4224/60000 (  7%) ] Loss: 0.0579 top1= 99.7159
+
+=== Log global consensus distance @ E46B10 ===
+consensus_distance=0.185
+
+
+
+=== Log clique consensus distance @ E46B10 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.561
+
+
+[E46B20 |   8064/60000 ( 13%) ] Loss: 0.0922 top1= 99.4318
+
+=== Log global consensus distance @ E46B20 ===
+consensus_distance=0.209
+
+
+
+=== Log clique consensus distance @ E46B20 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.656
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=6.2200 top1= 90.6951
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=28.4312 top1= 72.8065
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=30.0445 top1= 68.8502
+
+Train epoch 47
+[E47B0  |    384/60000 (  1%) ] Loss: 0.5538 top1= 98.8636
+
+=== Log global consensus distance @ E47B0 ===
+consensus_distance=0.219
+
+
+
+=== Log clique consensus distance @ E47B0 ===
+clique1_consensus_distance=0.004
+clique2_consensus_distance=0.704
+
+
+[E47B10 |   4224/60000 (  7%) ] Loss: 0.0002 top1=100.0000
+
+=== Log global consensus distance @ E47B10 ===
+consensus_distance=0.234
+
+
+
+=== Log clique consensus distance @ E47B10 ===
+clique1_consensus_distance=0.006
+clique2_consensus_distance=0.700
+
+
+[E47B20 |   8064/60000 ( 13%) ] Loss: 0.2672 top1= 99.1477
+
+=== Log global consensus distance @ E47B20 ===
+consensus_distance=0.223
+
+
+
+=== Log clique consensus distance @ E47B20 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.706
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=5.5812 top1= 91.7969
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=33.5990 top1= 71.4143
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=30.7971 top1= 70.3125
+
+Train epoch 48
+[E48B0  |    384/60000 (  1%) ] Loss: 0.0003 top1=100.0000
+
+=== Log global consensus distance @ E48B0 ===
+consensus_distance=0.218
+
+
+
+=== Log clique consensus distance @ E48B0 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.684
+
+
+[E48B10 |   4224/60000 (  7%) ] Loss: 0.4738 top1= 98.8636
+
+=== Log global consensus distance @ E48B10 ===
+consensus_distance=0.239
+
+
+
+=== Log clique consensus distance @ E48B10 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.771
+
+
+[E48B20 |   8064/60000 ( 13%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E48B20 ===
+consensus_distance=0.274
+
+
+
+=== Log clique consensus distance @ E48B20 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.928
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=7.3450 top1= 90.1042
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=29.1046 top1= 75.4307
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=49.0168 top1= 63.8321
+
+Train epoch 49
+[E49B0  |    384/60000 (  1%) ] Loss: 0.0271 top1= 99.4318
+
+=== Log global consensus distance @ E49B0 ===
+consensus_distance=0.290
+
+
+
+=== Log clique consensus distance @ E49B0 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.989
+
+
+[E49B10 |   4224/60000 (  7%) ] Loss: 0.0154 top1= 99.7159
+
+=== Log global consensus distance @ E49B10 ===
+consensus_distance=0.269
+
+
+
+=== Log clique consensus distance @ E49B10 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.920
+
+
+[E49B20 |   8064/60000 ( 13%) ] Loss: 0.0967 top1= 99.1477
+
+=== Log global consensus distance @ E49B20 ===
+consensus_distance=0.258
+
+
+
+=== Log clique consensus distance @ E49B20 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.880
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=7.2946 top1= 90.9756
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=33.6658 top1= 73.5377
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=32.5093 top1= 70.8133
+
+Train epoch 50
+[E50B0  |    384/60000 (  1%) ] Loss: 0.2163 top1= 99.7159
+
+=== Log global consensus distance @ E50B0 ===
+consensus_distance=0.268
+
+
+
+=== Log clique consensus distance @ E50B0 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.907
+
+
+[E50B10 |   4224/60000 (  7%) ] Loss: 0.0000 top1=100.0000
+
+=== Log global consensus distance @ E50B10 ===
+consensus_distance=0.259
+
+
+
+=== Log clique consensus distance @ E50B10 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.866
+
+
+[E50B20 |   8064/60000 ( 13%) ] Loss: 0.0126 top1= 99.7159
+
+=== Log global consensus distance @ E50B20 ===
+consensus_distance=0.244
+
+
+
+=== Log clique consensus distance @ E50B20 ===
+clique1_consensus_distance=0.005
+clique2_consensus_distance=0.791
+
+
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=7.5186 top1= 91.1959
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=26.0513 top1= 77.8846
+
+
+=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=32.4161 top1= 73.1871
+

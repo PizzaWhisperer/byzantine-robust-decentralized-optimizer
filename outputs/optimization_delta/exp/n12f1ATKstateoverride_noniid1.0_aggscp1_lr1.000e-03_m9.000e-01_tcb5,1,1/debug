@@ -17,3 +17,4 @@
 TwoCliquesWithByzantine(m=5,b=1)
 
 Train epoch 1
+[E 1B0  |    384/60000 (  1%) ] Loss: 2.3142 top1=  7.6705
