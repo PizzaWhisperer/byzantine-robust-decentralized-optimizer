@@ -211,7 +211,7 @@ class StateOverrideWorker(DecentralizedByzantineWorker):
         else:
             mixing = 1 / (len(self.target.running["neighbor_workers"]) + 1)
             v = self._attack_decentralized_aggregator(mixing)
-        self.running["flattened_models"] = repeat_model(self, v)
+        self.running["flattened_models"] = v
 
 
 
@@ -244,7 +244,7 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
         else:
             mixing = 1 / (len(self.target.running["neighbor_workers"]) + 1)
             v = self._attack_decentralized_aggregator(mixing)
-        self.running["flattened_models"] = repeat_model(self, v)
+        self.running["flattened_models"] = v
 
 
 # TODO: add tm - self.epsilon * v !
