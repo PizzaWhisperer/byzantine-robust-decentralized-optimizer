@@ -113,18 +113,17 @@ class EchoNoClipWorker(DecentralizedByzantineWorker):
         thetas = {}
         if self.targeted:
             tm = self.target.running["flattened_models"][self.target.index]
+            adv_scale = mixing or self.tagg.weights[self.index]
+            tm /= adv_scale
             for w in self.running["neighbor_workers"] + [self]:
-                nw = mixing or w.running["aggregator"].weights[self.index]
-                thetas[w.index] = tm/nw
+                thetas[w.index] = tm
         else:
             for w in self.running["neighbor_workers"]:
                 tm = w.running["flattened_models"][w.index]
-                nw = mixing or w.running["aggregator"].weights[self.index]
-                thetas[w.index] = tm/nw
-            # TODO: below is stupid trick to have a self model because + self in loop does not work
-
-            #print("Self update", self.running["flattened_models"][self.index])
-            thetas[self.index] = tm/nw
+                adv_scale = mixing or w.running["aggregator"].weights[self.index]
+                thetas[w.index] = tm/adv_scale
+            # TODO: below is stupid trick to have a self model (that we never use) because + self in loop does not work.
+            thetas[self.index] = tm/adv_scale
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -166,15 +165,19 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
         thetas = {}
         tm = self.target.running["flattened_models"][self.target.index]
         network_contrib = 0
+        adv_scale = 0 #rescaling process as the adv_weights are not in the loop
         for w in self.target.running["neighbor_workers"]:
             nw = mixing or self.tagg.weights[w.index]
-            network_contrib += w.running["flattened_models"][self.target.index] * nw
-        for w in self.running["neighbor_workers"]:
-            nw = mixing or w.running["aggregator"].weights[self.index]
-            if w.index == self.target.index:
-                thetas[w.index] = -network_contrib/nw
+            if isinstance(neighbor, ByzantineWorker):
+                adv_scale += nw
             else:
-                thetas[w.index] = network_contrib/nw
+                network_contrib += w.running["flattened_models"][self.target.index] * nw
+        network_contrib =/ adv_scale
+        for w in self.running["neighbor_workers"] + [self]:
+            if w.index == self.target.index:
+                thetas[w.index] = -network_contrib
+            else:
+                thetas[w.index] = network_contrib
         return thetas
 
     def pre_aggr(self, epoch, batch):
@@ -219,13 +222,17 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
 
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
-        for w in self.running["neighbor_workers"]:
+        for w in self.running["neighbor_workers"] + [self]:
             network_contrib = 0
+            adv_scale = 0 #rescaling theta_i as the advs' weights are "lost"
             for ww in w.running["neighbor_workers"]:
                 nw = mixing or w.running["aggregator"].weights[ww.index]
-                network_contrib += ww.running["flattened_models"][w.index] * nw
-            nw = mixing or w.running["aggregator"].weights[self.index]
-            thetas[w.index] = (self.target_state - network_contrib)/nw
+                if isinstance(neighbor, ByzantineWorker):
+                    adv_scale += nw
+                else:
+                    network_contrib += ww.running["flattened_models"][w.index] * nw
+
+            thetas[w.index] = (self.target_state - network_contrib)/adv_scale
         return thetas
 
 
