@@ -168,11 +168,11 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
         adv_scale = 0 #rescaling process as the adv_weights are not in the loop
         for w in self.target.running["neighbor_workers"]:
             nw = mixing or self.tagg.weights[w.index]
-            if isinstance(neighbor, ByzantineWorker):
+            if isinstance(w, ByzantineWorker):
                 adv_scale += nw
             else:
                 network_contrib += w.running["flattened_models"][self.target.index] * nw
-        network_contrib =/ adv_scale
+        network_contrib /= adv_scale
         for w in self.running["neighbor_workers"] + [self]:
             if w.index == self.target.index:
                 thetas[w.index] = -network_contrib
@@ -227,7 +227,7 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
             adv_scale = 0 #rescaling theta_i as the advs' weights are "lost"
             for ww in w.running["neighbor_workers"]:
                 nw = mixing or w.running["aggregator"].weights[ww.index]
-                if isinstance(neighbor, ByzantineWorker):
+                if isinstance(ww, ByzantineWorker):
                     adv_scale += nw
                 else:
                     network_contrib += ww.running["flattened_models"][w.index] * nw
