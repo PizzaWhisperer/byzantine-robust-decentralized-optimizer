@@ -1,0 +1,4 @@
+{'_meta': {'type': 'graph'}, 'spectral_gap': 0.0566396328597325}
+{'_meta': {'type': 'train'}, 'E': 1, 'B': 0, 'Length': 160, 'Loss': 2.305543804168701, 'top1': 12.5}
+{'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 160, 'Loss': 2.30256667137146, 'top1': 13.125}
+{'_meta': {'type': 'train'}, 'E': 1, 'B': 20, 'Length': 160, 'Loss': 2.3024172306060793, 'top1': 12.5}
