@@ -216,9 +216,11 @@ class StateOverrideWorker(DecentralizedByzantineWorker):
 
 
 class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
-    def __init__(self, target_state, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.target_state = target_state
+        self.target_state = torch.zeros(1199882)
+        self.target_state = self.target_state.to(self.device)
+        print("target state", self.target_state)
 
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
@@ -231,7 +233,6 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
                     adv_scale += nw
                 else:
                     network_contrib += ww.running["flattened_models"][w.index] * nw
-
             thetas[w.index] = (self.target_state - network_contrib)/adv_scale
         return thetas
 
@@ -447,10 +448,8 @@ def get_attackers(
         return attacker
 
     if args.attack.startswith("stateoverride"):
-        target_state = 0
         # TODO: what do we put as state? All 0 tensor flow?
         attacker = StateOverrideNoClipWorker(
-            target_state=target_state,
             simulator=trainer,
             index=rank,
             data_loader=loader,
