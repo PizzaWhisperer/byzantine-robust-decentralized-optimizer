@@ -196,11 +196,11 @@ class HonestMajorityRunner(MNISTTemplate):
                     # ("LF", "LF"),
                     #("IPM", "IPM"),
                     #("ALIE10", "ALIE"),
-                    #("dissensus1.5", "Dissensus"),
-                    ("sandtrap"+str(target), "SandTrap"),
-                    #("echo", "Echo"),
+                    ("dissensus1.5", "Dissensus"),
+                    #("sandtrap"+str(target), "SandTrap"),
+                    ("echo", "Echo"),
                     #("echo"+str(target), "Echo Targeted"),
-                    #("stateoverride", "StateOverride")
+                    ("stateoverride", "StateOverride")
                 ]:
                     for honest_majority in [False, True]:
                         if honest_majority:
