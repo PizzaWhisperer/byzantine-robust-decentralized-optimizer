@@ -182,8 +182,7 @@ class HonestMajorityRunner(MNISTTemplate):
         out_dir = os.path.abspath(os.path.join(self.log_dir, os.pardir))
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
-        target = 0
-        # TODO: how can we pick better target?
+        target = 10 #=2 *m
         def loop_files():
             for agg, agg_name in [
                 # ("cp0.1", "CP"),
@@ -230,6 +229,8 @@ class HonestMajorityRunner(MNISTTemplate):
         acc_results = []
         for agg, agg_name, attack, atk_name, path, honest_majority in loop_files():
             # Add global accuracies
+            print("attack", atk_name)
+
             try:
                 values = filter_entries_from_json(
                     path, kw="Global Average Validation Accuracy"
@@ -322,7 +323,9 @@ class HonestMajorityRunner(MNISTTemplate):
 
         a = g.legend
 
-        for i in range(3):
+        print("len", len(g.axes[0]))
+                
+        for i in range(len(g.axes[0])):
             g.axes[0][i].tick_params(axis='both', which='major', pad=-4)
         g.axes[0][0].set_ylabel('Accuracy (%)', labelpad=-2)
 
@@ -331,7 +334,7 @@ class HonestMajorityRunner(MNISTTemplate):
         g.axes[0][0].legend(handles[:5], labels[:5], ncol=5, loc='lower center',
                             columnspacing=0.5, handlelength=1, borderaxespad=0, labelspacing=0.,
                             bbox_to_anchor=(0.4, 1.14, 2.5, 0.2), frameon=False)
-        g.axes[0][2].legend(handles[5:], labels[5:], ncol=1, loc='upper right',
+        g.axes[0][-1].legend(handles[5:], labels[5:], ncol=1, loc='upper right',
                             columnspacing=0.5, handlelength=1, borderaxespad=0, labelspacing=0.1,
                             bbox_to_anchor=(1., 0.6), frameon=False)
 

@@ -14,3 +14,9 @@
 => Add worker ByzantineWorker(index=11)
 => Add worker ByzantineWorker(index=12)
 => Add worker ByzantineWorker(index=13)
+=> Add worker ByzantineWorker(index=14)
+
+=== Start adding graph ===
+<__main__.MaliciousRing object at 0x7ff823eae460>
+
+Train epoch 1
