@@ -59,6 +59,12 @@ Iterations,Accuracy (%),Agg,ATK,Group,H.M.E.
 810,9.805689102564102,GM,Dissensus,global,False
 840,9.805689102564102,GM,Dissensus,global,False
 870,9.805689102564102,GM,Dissensus,global,False
+0,9.805689102564102,GM,Echo,global,False
+30,9.805689102564102,GM,Echo,global,False
+60,9.805689102564102,GM,Echo,global,False
+90,9.805689102564102,GM,Echo,global,False
+120,9.805689102564102,GM,Echo,global,False
+150,9.805689102564102,GM,Echo,global,False
 0,88.00080128205128,MOZI,Dissensus,global,False
 30,91.66666666666667,MOZI,Dissensus,global,False
 60,93.24919871794872,MOZI,Dissensus,global,False
@@ -179,3 +185,13 @@ Iterations,Accuracy (%),Agg,ATK,Group,H.M.E.
 810,9.805689102564102,TM,Echo,global,False
 840,9.805689102564102,TM,Echo,global,False
 870,9.805689102564102,TM,Echo,global,False
+0,9.805689102564102,TM,StateOverride,global,False
+30,9.805689102564102,TM,StateOverride,global,False
+60,9.805689102564102,TM,StateOverride,global,False
+90,9.805689102564102,TM,StateOverride,global,False
+120,9.805689102564102,TM,StateOverride,global,False
+150,9.805689102564102,TM,StateOverride,global,False
+180,9.805689102564102,TM,StateOverride,global,False
+210,9.805689102564102,TM,StateOverride,global,False
+240,9.805689102564102,TM,StateOverride,global,False
+270,9.805689102564102,TM,StateOverride,global,False

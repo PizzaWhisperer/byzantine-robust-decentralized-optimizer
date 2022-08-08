@@ -1,13 +1,145 @@
 {'_meta': {'type': 'graph'}, 'spectral_gap': 0.0}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 0, 'Length': 352, 'Loss': 2.31421405618841, 'top1': 7.670454545454546}
 {'_meta': {'type': 'global_consensus_distance'}, 'E': 1, 'B': 0, 'gcd': nan}
-{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 0, 'clique1': 3.1648184517507616e-07, 'clique2': 2.2000052922521718e-05}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 0, 'clique1': 3.1648147569285356e-07, 'clique2': 2.2000060198479332e-05}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 37.78409090909091}
 {'_meta': {'type': 'global_consensus_distance'}, 'E': 1, 'B': 10, 'gcd': nan}
-{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 10, 'clique1': 2.250863326480612e-05, 'clique2': 0.04057475924491882}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 10, 'clique1': 2.2508635083795525e-05, 'clique2': 0.04057475924491882}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 47.72727272727273}
 {'_meta': {'type': 'global_consensus_distance'}, 'E': 1, 'B': 20, 'gcd': nan}
-{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 20, 'clique1': 5.161756416782737e-05, 'clique2': 0.23242425918579102}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 20, 'clique1': 5.161756416782737e-05, 'clique2': 0.23242424428462982}
 {'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
-{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 3.103334677525056, 'top1': 38.49158653846154}
-{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 2.629866590866676, 'top1': 32.05128205128205}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 3.1033343963133984, 'top1': 38.49158653846154}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 2.6298662485220494, 'top1': 32.05128205128205}
+{'_meta': {'type': 'train'}, 'E': 2, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 64.77272727272727}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 2, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 2, 'B': 0, 'clique1': 7.535357144661248e-05, 'clique2': 0.5319201350212097}
+{'_meta': {'type': 'train'}, 'E': 2, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 70.17045454545455}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 2, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 2, 'B': 10, 'clique1': 7.409574027406052e-05, 'clique2': 0.8151581883430481}
+{'_meta': {'type': 'train'}, 'E': 2, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 76.98863636363636}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 2, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 2, 'B': 20, 'clique1': 5.597615381702781e-05, 'clique2': 1.0604727268218994}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 2, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 2, 'Length': 9984, 'Loss': 4.298214450860635, 'top1': 39.352964743589745}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 2, 'Length': 9984, 'Loss': 3.305132419635088, 'top1': 35.71714743589744}
+{'_meta': {'type': 'train'}, 'E': 3, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 82.67045454545455}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 3, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 3, 'B': 0, 'clique1': 4.079196878592484e-05, 'clique2': 1.283817172050476}
+{'_meta': {'type': 'train'}, 'E': 3, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 82.95454545454545}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 3, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 3, 'B': 10, 'clique1': 2.419043994450476e-05, 'clique2': 1.4741121530532837}
+{'_meta': {'type': 'train'}, 'E': 3, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 82.38636363636364}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 3, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 3, 'B': 20, 'clique1': 1.9671553673106246e-05, 'clique2': 1.622574806213379}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 3, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 3, 'Length': 9984, 'Loss': 4.325448176799676, 'top1': 39.98397435897436}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 3, 'Length': 9984, 'Loss': 4.0751202748372, 'top1': 39.322916666666664}
+{'_meta': {'type': 'train'}, 'E': 4, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 86.07954545454545}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 4, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 4, 'B': 0, 'clique1': 1.9398821677896194e-05, 'clique2': 1.7418997287750244}
+{'_meta': {'type': 'train'}, 'E': 4, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 86.07954545454545}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 4, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 4, 'B': 10, 'clique1': 1.24964399219607e-05, 'clique2': 1.8430737257003784}
+{'_meta': {'type': 'train'}, 'E': 4, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 83.52272727272727}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 4, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 4, 'B': 20, 'clique1': 1.196235552924918e-05, 'clique2': 1.9249104261398315}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 4, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 4, 'Length': 9984, 'Loss': 4.309678254983364, 'top1': 40.17427884615385}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 4, 'Length': 9984, 'Loss': 4.55955662788489, 'top1': 42.25761217948718}
+{'_meta': {'type': 'train'}, 'E': 5, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 86.36363636363636}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 5, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 5, 'B': 0, 'clique1': 1.4078613276069518e-05, 'clique2': 1.998108148574829}
+{'_meta': {'type': 'train'}, 'E': 5, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 87.2159090909091}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 5, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 5, 'B': 10, 'clique1': 9.16300905373646e-06, 'clique2': 2.0672976970672607}
+{'_meta': {'type': 'train'}, 'E': 5, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 85.79545454545455}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 5, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 5, 'B': 20, 'clique1': 8.936875929066446e-06, 'clique2': 2.127420663833618}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 5, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 5, 'Length': 9984, 'Loss': 4.466258703133999, 'top1': 41.25600961538461}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 5, 'Length': 9984, 'Loss': 4.881613282056955, 'top1': 43.048878205128204}
+{'_meta': {'type': 'train'}, 'E': 6, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 86.36363636363636}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 6, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 6, 'B': 0, 'clique1': 1.1406021258153487e-05, 'clique2': 2.1843748092651367}
+{'_meta': {'type': 'train'}, 'E': 6, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 87.5}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 6, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 6, 'B': 10, 'clique1': 7.331191682169447e-06, 'clique2': 2.2395622730255127}
+{'_meta': {'type': 'train'}, 'E': 6, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 86.64772727272727}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 6, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 6, 'B': 20, 'clique1': 7.131893653422594e-06, 'clique2': 2.2882649898529053}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 6, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 6, 'Length': 9984, 'Loss': 4.6263599915382185, 'top1': 42.50801282051282}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 6, 'Length': 9984, 'Loss': 5.1398794528765555, 'top1': 43.71995192307692}
+{'_meta': {'type': 'train'}, 'E': 7, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 86.36363636363636}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 7, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 7, 'B': 0, 'clique1': 9.678571586846374e-06, 'clique2': 2.336446523666382}
+{'_meta': {'type': 'train'}, 'E': 7, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 87.7840909090909}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 7, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 7, 'B': 10, 'clique1': 6.149134605948348e-06, 'clique2': 2.3844659328460693}
+{'_meta': {'type': 'train'}, 'E': 7, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 86.64772727272727}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 7, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 7, 'B': 20, 'clique1': 5.966566277493257e-06, 'clique2': 2.4270217418670654}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 7, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 7, 'Length': 9984, 'Loss': 4.773022000606243, 'top1': 43.68990384615385}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 7, 'Length': 9984, 'Loss': 5.3664918801723385, 'top1': 44.1005608974359}
+{'_meta': {'type': 'train'}, 'E': 8, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 87.7840909090909}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 8, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 8, 'B': 0, 'clique1': 8.38055075291777e-06, 'clique2': 2.4696786403656006}
+{'_meta': {'type': 'train'}, 'E': 8, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 87.7840909090909}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 8, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 8, 'B': 10, 'clique1': 5.322832748788642e-06, 'clique2': 2.512465238571167}
+{'_meta': {'type': 'train'}, 'E': 8, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 87.2159090909091}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 8, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 8, 'B': 20, 'clique1': 5.1533961595851e-06, 'clique2': 2.550793409347534}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 8, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 8, 'Length': 9984, 'Loss': 4.905856474851951, 'top1': 44.641426282051285}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 8, 'Length': 9984, 'Loss': 5.57010616400303, 'top1': 44.32091346153846}
+{'_meta': {'type': 'train'}, 'E': 9, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 87.7840909090909}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 9, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 9, 'B': 0, 'clique1': 7.346141501329839e-06, 'clique2': 2.59006929397583}
+{'_meta': {'type': 'train'}, 'E': 9, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 88.35227272727273}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 9, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 9, 'B': 10, 'clique1': 4.673644525610143e-06, 'clique2': 2.6297707557678223}
+{'_meta': {'type': 'train'}, 'E': 9, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 88.63636363636364}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 9, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 9, 'B': 20, 'clique1': 4.547665866994066e-06, 'clique2': 2.665672779083252}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 9, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 9, 'Length': 9984, 'Loss': 5.030516924002232, 'top1': 45.32251602564103}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 9, 'Length': 9984, 'Loss': 5.749627577952849, 'top1': 44.52123397435897}
+{'_meta': {'type': 'train'}, 'E': 10, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 88.06818181818181}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 10, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 10, 'B': 0, 'clique1': 6.506872068712255e-06, 'clique2': 2.7029712200164795}
+{'_meta': {'type': 'train'}, 'E': 10, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 88.63636363636364}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 10, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 10, 'B': 10, 'clique1': 4.158750471106032e-06, 'clique2': 2.7403085231781006}
+{'_meta': {'type': 'train'}, 'E': 10, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 88.63636363636364}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 10, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 10, 'B': 20, 'clique1': 4.068196176376659e-06, 'clique2': 2.774571657180786}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 10, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 10, 'Length': 9984, 'Loss': 5.150098097630036, 'top1': 45.77323717948718}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 10, 'Length': 9984, 'Loss': 5.919276879383967, 'top1': 44.631410256410255}
+{'_meta': {'type': 'train'}, 'E': 11, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 88.35227272727273}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 11, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 11, 'B': 0, 'clique1': 5.824974778079195e-06, 'clique2': 2.810368776321411}
+{'_meta': {'type': 'train'}, 'E': 11, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 88.92045454545455}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 11, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 11, 'B': 10, 'clique1': 3.7238253298710333e-06, 'clique2': 2.846115827560425}
+{'_meta': {'type': 'train'}, 'E': 11, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 88.63636363636364}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 11, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 11, 'B': 20, 'clique1': 3.683385557451402e-06, 'clique2': 2.878854513168335}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 11, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 11, 'Length': 9984, 'Loss': 5.264339605967204, 'top1': 46.09375}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 11, 'Length': 9984, 'Loss': 6.076720824608436, 'top1': 44.76161858974359}
+{'_meta': {'type': 'train'}, 'E': 12, 'B': 0, 'Length': 352, 'Loss': nan, 'top1': 88.92045454545455}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 12, 'B': 0, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 12, 'B': 0, 'clique1': 5.194058303459315e-06, 'clique2': 2.9136528968811035}
+{'_meta': {'type': 'train'}, 'E': 12, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 89.20454545454545}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 12, 'B': 10, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 12, 'B': 10, 'clique1': 3.344427341289702e-06, 'clique2': 2.948288679122925}
+{'_meta': {'type': 'train'}, 'E': 12, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 88.92045454545455}
+{'_meta': {'type': 'global_consensus_distance'}, 'E': 12, 'B': 20, 'gcd': nan}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 12, 'B': 20, 'clique1': 3.346571702422807e-06, 'clique2': 2.9802589416503906}
+{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 12, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
+{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 12, 'Length': 9984, 'Loss': 5.378640217658801, 'top1': 46.47435897435897}
+{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 12, 'Length': 9984, 'Loss': 6.223792033317761, 'top1': 44.85176282051282}

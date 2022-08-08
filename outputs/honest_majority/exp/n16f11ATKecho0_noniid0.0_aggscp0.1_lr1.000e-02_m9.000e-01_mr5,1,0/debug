@@ -1,0 +1,24 @@
+
+=== Start adding workers ===
+=> Add worker SGDMWorker(index=0, momentum=0.9)
+=> Add worker SGDMWorker(index=1, momentum=0.9)
+=> Add worker SGDMWorker(index=2, momentum=0.9)
+=> Add worker SGDMWorker(index=3, momentum=0.9)
+=> Add worker SGDMWorker(index=4, momentum=0.9)
+=> Add worker ByzantineWorker(index=5)
+=> Add worker ByzantineWorker(index=6)
+=> Add worker ByzantineWorker(index=7)
+=> Add worker ByzantineWorker(index=8)
+=> Add worker ByzantineWorker(index=9)
+=> Add worker ByzantineWorker(index=10)
+=> Add worker ByzantineWorker(index=11)
+=> Add worker ByzantineWorker(index=12)
+=> Add worker ByzantineWorker(index=13)
+=> Add worker ByzantineWorker(index=14)
+=> Add worker ByzantineWorker(index=15)
+
+=== Start adding graph ===
+<__main__.MaliciousRing object at 0x7f3d535373d0>
+
+Train epoch 1
+[E 1B0  |    512/60000 (  1%) ] Loss: 2.3055 top1= 12.5000

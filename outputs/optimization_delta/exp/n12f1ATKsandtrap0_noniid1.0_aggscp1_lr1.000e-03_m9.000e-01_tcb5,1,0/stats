@@ -1,13 +1,7 @@
 {'_meta': {'type': 'graph'}, 'spectral_gap': 0.0}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 0, 'Length': 352, 'Loss': 2.31421405618841, 'top1': 7.670454545454546}
 {'_meta': {'type': 'global_consensus_distance'}, 'E': 1, 'B': 0, 'gcd': nan}
-{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 0, 'clique1': 3.1648184517507616e-07, 'clique2': 2.2000056560500525e-05}
+{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 0, 'clique1': 3.164822715007176e-07, 'clique2': 2.200004928454291e-05}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 352, 'Loss': nan, 'top1': 37.78409090909091}
 {'_meta': {'type': 'global_consensus_distance'}, 'E': 1, 'B': 10, 'gcd': nan}
 {'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 10, 'clique1': 2.2508624169859104e-05, 'clique2': 0.04057475924491882}
-{'_meta': {'type': 'train'}, 'E': 1, 'B': 20, 'Length': 352, 'Loss': nan, 'top1': 47.72727272727273}
-{'_meta': {'type': 'global_consensus_distance'}, 'E': 1, 'B': 20, 'gcd': nan}
-{'_meta': {'type': 'clique_consensus_distance'}, 'E': 1, 'B': 20, 'clique1': 5.161756416782737e-05, 'clique2': 0.23242425918579102}
-{'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': nan, 'top1': 9.805689102564102}
-{'_meta': {'type': 'Clique1 Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 3.1033347233747826, 'top1': 38.49158653846154}
-{'_meta': {'type': 'Clique2 Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 2.6298666367164025, 'top1': 32.05128205128205}

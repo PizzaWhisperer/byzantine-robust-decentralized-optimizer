@@ -160,7 +160,6 @@ class SandTrapWorker(DecentralizedByzantineWorker):
 class SandTrapNoClipWorker(DecentralizedByzantineWorker):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
         tm = self.target.running["flattened_models"][self.target.index]
@@ -182,7 +181,7 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
 
     def pre_aggr(self, epoch, batch):
         self._initialize_target()
-
+    
         if isinstance(self.tagg, DecentralizedAggregator):
             self.running["flattened_models"] = self._attack_decentralized_aggregator()
         else:

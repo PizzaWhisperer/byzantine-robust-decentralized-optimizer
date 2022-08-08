@@ -73,25 +73,3 @@ clique1_consensus_distance=0.000
 clique2_consensus_distance=0.041
 
 
-[E 1B20 |   8064/60000 ( 13%) ] Loss: nan top1= 47.7273
-
-=== Log global consensus distance @ E1B20 ===
-consensus_distance=nan
-
-
-
-=== Log clique consensus distance @ E1B20 ===
-clique1_consensus_distance=0.000
-clique2_consensus_distance=0.232
-
-
-
-=> Averaged model (Global Average Validation Accuracy) | Eval Loss=nan top1=  9.8057
-
-
-=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=3.1033 top1= 38.4916
-
-
-=> Averaged model (Clique2 Average Validation Accuracy) | Eval Loss=2.6299 top1= 32.0513
-
-Train epoch 2
