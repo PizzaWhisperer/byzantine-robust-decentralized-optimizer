@@ -8,7 +8,7 @@ function optimization_delta {
     do
         #for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
         #for attack in "echo" "echo10" "sandtrap10" "stateoverride"
-		
+
         for attack in  "sandtrap10"
         do
             python optimization_delta.py ${COMMON} -n 12 -f 1 --attack $attack --momentum 0.9 \
@@ -33,16 +33,13 @@ function optimization_delta_plot {
 
 function honest_majority {
     COMMON="--lr 1e-2 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30"
-    for agg in "scp0.1" "tm2" "rfa8" "mozi0.4,0.5"
+    for agg in "scp0.1" "rfa8" "mozi0.4,0.5"
     do
         #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
-        for attack in  "sandtrap10" 
-		#for attack in "echo" "echo10" "sandtrap10" "stateoverride"
-        do
-            python honest_majority.py ${COMMON} -n 16 -f 11 --attack ${attack} --momentum 0.9 \
-            --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp" &
-            pids[$!]=$!
-        done
+        python honest_majority.py ${COMMON} -n 16 -f 11 --momentum 0.9 \
+        --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp" &
+        pids[$!]=$!
+
     done
 
     # wait for all pids
@@ -51,15 +48,13 @@ function honest_majority {
     done
     unset pids
 
-    for agg in "scp0.1" "tm2" "rfa8" "mozi0.4,0.5"
+    for agg in "scp0.1" "rfa8" "mozi0.4,0.5"
     do
         #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
-        for attack in "sandtrap10"
-        do
-            python honest_majority.py ${COMMON} -n 15 -f 10 --attack ${attack} --momentum 0.9 \
-            --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" &
-            pids[$!]=$!
-        done
+      python honest_majority.py ${COMMON} -n 15 -f 10 --momentum 0.9 \
+      --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" &
+      pids[$!]=$!
+
     done
 
     # wait for all pids
@@ -74,7 +69,7 @@ function honest_majority_plot {
     COMMON="--lr 1e-2 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30"
     # python honest_majority.py ${COMMON} -n 16 -f 11 --attack "LF" --momentum 0.9 \
     # --graph mr5,1,0 --noniid 0 --agg "scp1" --identifier "honest_majority" --analyze
-    python honest_majority.py ${COMMON} -n 15 -f 10 --attack "LF" --momentum 0.9 \
+    python honest_majority.py ${COMMON} -n 15 -f 10 --momentum 0.9 \
     --graph mr5,1,1 --noniid 0 --agg "scp1" --identifier "exp" --analyze
 }
 

@@ -188,8 +188,7 @@ class HonestMajorityRunner(MNISTTemplate):
                 # ("cp0.1", "CP"),
                 ("scp0.1", "SCClip"),
                 ("rfa8", "GM"),
-                ("mozi0.4,0.5", "MOZI"),
-                    ("tm2", "TM")]:
+                ("mozi0.4,0.5", "MOZI")]:
                 for attack, atk_name in [
                     # ("BF", "BF"),
                     # ("LF", "LF"),
@@ -324,7 +323,7 @@ class HonestMajorityRunner(MNISTTemplate):
         a = g.legend
 
         print("len", len(g.axes[0]))
-                
+
         for i in range(len(g.axes[0])):
             g.axes[0][i].tick_params(axis='both', which='major', pad=-4)
         g.axes[0][0].set_ylabel('Accuracy (%)', labelpad=-2)
