@@ -188,14 +188,15 @@ class HonestMajorityRunner(MNISTTemplate):
                 # ("cp0.1", "CP"),
                 ("scp0.1", "SCClip"),
                 ("rfa8", "GM"),
-                ("mozi0.4,0.5", "MOZI")]:
+                ("mozi0.4,0.5", "MOZI"),
+                ("tm2", "TM")]:
                 for attack, atk_name in [
                     # ("BF", "BF"),
                     # ("LF", "LF"),
                     #("IPM", "IPM"),
                     #("ALIE10", "ALIE"),
-                    ("dissensus1.5", "Dissensus"),
-                    #("sandtrap"+str(target), "SandTrap"),
+                    #("dissensus1.5", "Dissensus"),
+                    ("sandtrap"+str(target), "SandTrap"),
                     ("echo", "Echo"),
                     #("echo"+str(target), "Echo Targeted"),
                     ("stateoverride", "StateOverride")
@@ -228,7 +229,6 @@ class HonestMajorityRunner(MNISTTemplate):
         acc_results = []
         for agg, agg_name, attack, atk_name, path, honest_majority in loop_files():
             # Add global accuracies
-            print("attack", atk_name)
 
             try:
                 values = filter_entries_from_json(
@@ -321,8 +321,6 @@ class HonestMajorityRunner(MNISTTemplate):
         g.set(ylim=(0, 100))
 
         a = g.legend
-
-        print("len", len(g.axes[0]))
 
         for i in range(len(g.axes[0])):
             g.axes[0][i].tick_params(axis='both', which='major', pad=-4)

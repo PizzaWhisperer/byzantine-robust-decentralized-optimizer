@@ -33,35 +33,39 @@ function optimization_delta_plot {
 
 function honest_majority {
     COMMON="--lr 1e-2 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30"
-    for agg in "scp0.1" "rfa8" "mozi0.4,0.5"
+    for agg in "scp0.1" "rfa8" "mozi0.4,0.5" "tm2"
     do
+      for attack in "echo" "sandtrap10" "stateoverride"
+      do
         #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
-        python honest_majority.py ${COMMON} -n 16 -f 11 --momentum 0.9 \
-        --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp" &
-        pids[$!]=$!
-
+        python honest_majority.py ${COMMON} -n 16 -f 11 --attack ${attack} --momentum 0.9 \
+        --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp"
+        #&pids[$!]=$!
+      done
     done
 
     # wait for all pids
-    for pid in ${pids[*]}; do
-        wait $pid
-    done
-    unset pids
+    #for pid in ${pids[*]}; do
+    #      wait $pid
+    #done
+    #unset pids
 
-    for agg in "scp0.1" "rfa8" "mozi0.4,0.5"
-    do
+    for agg in "scp0.1" "rfa8" "mozi0.4,0.5" "tm2"
+      do
+      for attack in "echo" "sandtrap10" "stateoverride"
+      do
         #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
-      python honest_majority.py ${COMMON} -n 15 -f 10 --momentum 0.9 \
-      --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" &
-      pids[$!]=$!
-
+        python honest_majority.py ${COMMON} -n 15 -f 10 --attack ${attack} --momentum 0.9 \
+        --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" #&
+        #pids[$!]=$!
+      done
     done
 
     # wait for all pids
-    for pid in ${pids[*]}; do
-        wait $pid
-    done
-    unset pids
+    #for pid in ${pids[*]}; do
+    #    wait $pid
+    #done
+    #unset pids
 }
 
 
@@ -69,7 +73,7 @@ function honest_majority_plot {
     COMMON="--lr 1e-2 --use-cuda --epochs 30 --batch-size 32 --max-batch-size-per-epoch 30"
     # python honest_majority.py ${COMMON} -n 16 -f 11 --attack "LF" --momentum 0.9 \
     # --graph mr5,1,0 --noniid 0 --agg "scp1" --identifier "honest_majority" --analyze
-    python honest_majority.py ${COMMON} -n 15 -f 10 --momentum 0.9 \
+    python honest_majority.py ${COMMON} -n 15 -f 10 --attack "NA" --momentum 0.9 \
     --graph mr5,1,1 --noniid 0 --agg "scp1" --identifier "exp" --analyze
 }
 
