@@ -1,0 +1,77 @@
+
+=== Start adding workers ===
+=> Add worker SGDMWorker(index=0, momentum=0.9)
+=> Add worker SGDMWorker(index=1, momentum=0.9)
+=> Add worker SGDMWorker(index=2, momentum=0.9)
+=> Add worker SGDMWorker(index=3, momentum=0.9)
+=> Add worker SGDMWorker(index=4, momentum=0.9)
+=> Add worker ByzantineWorker(index=5)
+=> Add worker ByzantineWorker(index=6)
+=> Add worker ByzantineWorker(index=7)
+=> Add worker ByzantineWorker(index=8)
+=> Add worker ByzantineWorker(index=9)
+=> Add worker ByzantineWorker(index=10)
+=> Add worker ByzantineWorker(index=11)
+=> Add worker ByzantineWorker(index=12)
+=> Add worker ByzantineWorker(index=13)
+=> Add worker ByzantineWorker(index=14)
+
+=== Start adding graph ===
+<__main__.MaliciousRing object at 0x7fa228dd2460>
+
+Train epoch 1
+[E 1B0  |    480/60000 (  1%) ] Loss: 2.3052 top1= 11.2500
+
+=== Peeking data label distribution E1B0 ===
+Worker 0 has targets: tensor([9, 0, 5, 4, 6], device='cuda:0')
+Worker 1 has targets: tensor([3, 6, 4, 0, 8], device='cuda:0')
+Worker 2 has targets: tensor([5, 8, 7, 0, 7], device='cuda:0')
+Worker 3 has targets: tensor([4, 9, 4, 7, 7], device='cuda:0')
+Worker 4 has targets: tensor([7, 9, 1, 0, 2], device='cuda:0')
+Worker 5 has targets: tensor([4, 3, 8, 6, 8], device='cuda:0')
+Worker 6 has targets: tensor([9, 1, 7, 7, 8], device='cuda:0')
+Worker 7 has targets: tensor([6, 3, 3, 8, 5], device='cuda:0')
+Worker 8 has targets: tensor([8, 2, 3, 9, 7], device='cuda:0')
+Worker 9 has targets: tensor([8, 5, 5, 2, 1], device='cuda:0')
+Worker 10 has targets: tensor([7, 0, 1, 1, 9], device='cuda:0')
+Worker 11 has targets: tensor([4, 2, 6, 0, 3], device='cuda:0')
+Worker 12 has targets: tensor([8, 1, 0, 7, 1], device='cuda:0')
+Worker 13 has targets: tensor([9, 6, 1, 9, 2], device='cuda:0')
+Worker 14 has targets: tensor([4, 5, 4, 2, 4], device='cuda:0')
+
+
+
+=== Log mixing matrix @ E1B0 ===
+[[0.556 0.111 0.    0.    0.111 0.111 0.    0.    0.    0.    0.111 0.
+  0.    0.    0.   ]
+ [0.111 0.556 0.111 0.    0.    0.    0.111 0.    0.    0.    0.    0.111
+  0.    0.    0.   ]
+ [0.    0.111 0.556 0.111 0.    0.    0.    0.111 0.    0.    0.    0.
+  0.111 0.    0.   ]
+ [0.    0.    0.111 0.556 0.111 0.    0.    0.    0.111 0.    0.    0.
+  0.    0.111 0.   ]
+ [0.111 0.    0.    0.111 0.556 0.    0.    0.    0.    0.111 0.    0.
+  0.    0.    0.111]
+ [0.111 0.    0.    0.    0.    0.889 0.    0.    0.    0.    0.    0.
+  0.    0.    0.   ]
+ [0.    0.111 0.    0.    0.    0.    0.889 0.    0.    0.    0.    0.
+  0.    0.    0.   ]
+ [0.    0.    0.111 0.    0.    0.    0.    0.889 0.    0.    0.    0.
+  0.    0.    0.   ]
+ [0.    0.    0.    0.111 0.    0.    0.    0.    0.889 0.    0.    0.
+  0.    0.    0.   ]
+ [0.    0.    0.    0.    0.111 0.    0.    0.    0.    0.889 0.    0.
+  0.    0.    0.   ]
+ [0.111 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.889 0.
+  0.    0.    0.   ]
+ [0.    0.111 0.    0.    0.    0.    0.    0.    0.    0.    0.    0.889
+  0.    0.    0.   ]
+ [0.    0.    0.111 0.    0.    0.    0.    0.    0.    0.    0.    0.
+  0.889 0.    0.   ]
+ [0.    0.    0.    0.111 0.    0.    0.    0.    0.    0.    0.    0.
+  0.    0.889 0.   ]
+ [0.    0.    0.    0.    0.111 0.    0.    0.    0.    0.    0.    0.
+  0.    0.    0.889]]
+
+
+[E 1B10 |   5280/60000 (  9%) ] Loss: 1.4043 top1= 53.1250
