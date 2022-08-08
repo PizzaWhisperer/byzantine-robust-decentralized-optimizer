@@ -322,7 +322,7 @@ class HonestMajorityRunner(MNISTTemplate):
 
         a = g.legend
 
-        for i in range(len(g.axes[0])):
+        for i in range(3):
             g.axes[0][i].tick_params(axis='both', which='major', pad=-4)
         g.axes[0][0].set_ylabel('Accuracy (%)', labelpad=-2)
 
@@ -331,7 +331,7 @@ class HonestMajorityRunner(MNISTTemplate):
         g.axes[0][0].legend(handles[:5], labels[:5], ncol=5, loc='lower center',
                             columnspacing=0.5, handlelength=1, borderaxespad=0, labelspacing=0.,
                             bbox_to_anchor=(0.4, 1.14, 2.5, 0.2), frameon=False)
-        g.axes[0][-1].legend(handles[5:], labels[5:], ncol=1, loc='upper right',
+        g.axes[0][2].legend(handles[5:], labels[5:], ncol=1, loc='upper right',
                             columnspacing=0.5, handlelength=1, borderaxespad=0, labelspacing=0.1,
                             bbox_to_anchor=(1., 0.6), frameon=False)
 
