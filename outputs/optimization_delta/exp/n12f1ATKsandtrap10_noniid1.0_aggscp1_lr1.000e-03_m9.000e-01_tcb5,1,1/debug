@@ -269,3 +269,9 @@ clique1_consensus_distance=0.003
 clique2_consensus_distance=0.250
 
 
+
+=> Averaged model (Global Average Validation Accuracy) | Eval Loss=1.1605 top1= 73.4776
+
+
+=> Averaged model (Clique1 Average Validation Accuracy) | Eval Loss=1.9822 top1= 41.6567
+

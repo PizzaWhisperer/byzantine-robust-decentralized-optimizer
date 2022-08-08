@@ -7,4 +7,3 @@
 => Add worker SGDMWorker(index=4, momentum=0.9)
 => Add worker ByzantineWorker(index=5)
 => Add worker ByzantineWorker(index=6)
-=> Add worker ByzantineWorker(index=7)

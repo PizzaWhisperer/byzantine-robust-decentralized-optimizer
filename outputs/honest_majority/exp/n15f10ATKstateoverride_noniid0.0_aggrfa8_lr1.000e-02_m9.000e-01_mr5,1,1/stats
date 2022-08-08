@@ -1,10 +1,10 @@
 {'_meta': {'type': 'graph'}, 'spectral_gap': 0.06841609759959677}
 {'_meta': {'type': 'train'}, 'E': 1, 'B': 0, 'Length': 160, 'Loss': 2.3051759243011474, 'top1': 11.25}
-{'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 160, 'Loss': 2.2941641807556152, 'top1': 16.25}
-{'_meta': {'type': 'train'}, 'E': 1, 'B': 20, 'Length': 160, 'Loss': 2.300495910644531, 'top1': 21.25}
+{'_meta': {'type': 'train'}, 'E': 1, 'B': 10, 'Length': 160, 'Loss': 2.2941641330718996, 'top1': 16.25}
+{'_meta': {'type': 'train'}, 'E': 1, 'B': 20, 'Length': 160, 'Loss': 2.300495958328247, 'top1': 21.25}
 {'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 1, 'Length': 9984, 'Loss': 2.3021093606948853, 'top1': 11.348157051282051}
 {'_meta': {'type': 'train'}, 'E': 2, 'B': 0, 'Length': 160, 'Loss': 2.3029009342193603, 'top1': 8.75}
-{'_meta': {'type': 'train'}, 'E': 2, 'B': 10, 'Length': 160, 'Loss': 2.302525043487549, 'top1': 11.875}
+{'_meta': {'type': 'train'}, 'E': 2, 'B': 10, 'Length': 160, 'Loss': 2.3025250911712645, 'top1': 11.875}
 {'_meta': {'type': 'train'}, 'E': 2, 'B': 20, 'Length': 160, 'Loss': 2.302577257156372, 'top1': 10.0}
 {'_meta': {'type': 'Global Average Validation Accuracy'}, 'E': 2, 'Length': 9984, 'Loss': 2.3025750502561912, 'top1': 11.348157051282051}
 {'_meta': {'type': 'train'}, 'E': 3, 'B': 0, 'Length': 160, 'Loss': 2.3026212215423585, 'top1': 6.25}
