@@ -273,26 +273,26 @@ class OptimizationDeltaRunner(MNISTTemplate):
 
         def loop_files():
             b = 1
+            delta = 1
             # for delta in [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 1]:
-            for delta in [0, 0.25, 0.5, 0.75, 1]:
-                # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
-                #for attack in ["dissensus1.5"]:
-                #for attack in ["echo", "echo0", "sandtrap0", "stateoverride"]:
-                for attack in ["stateoverride"]:
-                    log_dir = self.LOG_DIR_PATTERN.format(
-                        script=sys.argv[0][:-3],
-                        exp_id=self.args.identifier,
-                        n=11 + b,
-                        f=b,
-                        attack=attack,
-                        noniid=1.0,
-                        agg="scp1",
-                        lr=1e-3,
-                        momentum=0.9,
-                        graph=f"c5,1,{delta}",
-                    )
-                    path = log_dir + "stats"
-                    yield b, delta, attack, path
+            # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
+            #for attack in ["dissensus1.5"]:
+            #for attack in ["echo", "echo0", "sandtrap0", "stateoverride"]:
+            for attack in ["stateoverride"]:
+                log_dir = self.LOG_DIR_PATTERN.format(
+                    script=sys.argv[0][:-3],
+                    exp_id=self.args.identifier,
+                    n=11 + b,
+                    f=b,
+                    attack=attack,
+                    noniid=1.0,
+                    agg="scp1",
+                    lr=1e-3,
+                    momentum=0.9,
+                    graph=f"c5,1,{delta}",
+                )
+                path = log_dir + "stats"
+                yield b, delta, attack, path
 
         # Plot for accuracy
         acc_results = []
