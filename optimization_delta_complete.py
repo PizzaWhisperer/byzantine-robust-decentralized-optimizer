@@ -273,7 +273,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
         }
 
         def loop_files():
-            b = 0
+            b = 1
             delta = 0.25
             # for delta in [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 1]:
             # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
@@ -290,7 +290,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
                     agg="scp1",
                     lr=1e-3,
                     momentum=0.9,
-                    graph=f"c5,0,{delta}",
+                    graph=f"c5,1,{delta}",
                 )
                 path = log_dir + "stats"
                 yield b, delta, attack, path
