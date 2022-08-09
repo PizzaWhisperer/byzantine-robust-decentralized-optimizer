@@ -29,6 +29,7 @@ def get_graph(args):
         # Pattern: twocliques2,1 for n=2 m=1
         m, b, delta = args.graph[len("c"):].split(",")
         m, b, delta = int(m), int(b), float(delta)
+        print(args.n, m)
         assert args.n == 2 * m + 1 + b
         return gu.Complete(args.n)
 
@@ -147,8 +148,8 @@ class OptimizationDeltaRunner(MNISTTemplate):
         "outputs/{script}/{exp_id}/" + EXP_PATTERN + "/"
     )
 
-    DEFAULT_LINE_ARG = """--lr 0.01 --use-cuda --debug -n 12 -f 1 --epochs 30 --momentum 0.0 \
---batch-size 32 --max-batch-size-per-epoch 9999 --graph c5,1 --noniid 0 --agg gossip_avg \
+    DEFAULT_LINE_ARG = """--lr 0.01 --use-cuda --debug -n 10 -f 0 --epochs 30 --momentum 0.0 \
+--batch-size 32 --max-batch-size-per-epoch 9999 --graph c5,0 --noniid 0 --agg gossip_avg \
 --identifier demo --attack BF"""
 
     def __init__(
@@ -272,7 +273,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
         }
 
         def loop_files():
-            b = 1
+            b = 0
             delta = 1
             # for delta in [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 1]:
             # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
@@ -289,7 +290,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
                     agg="scp1",
                     lr=1e-3,
                     momentum=0.9,
-                    graph=f"c5,1,{delta}",
+                    graph=f"c5,0,{delta}",
                 )
                 path = log_dir + "stats"
                 yield b, delta, attack, path

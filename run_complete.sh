@@ -11,8 +11,8 @@ function optimization_delta {
 
     for attack in "stateoverride"
     do
-        python optimization_delta_complete.py ${COMMON} -n 12 -f 1 --attack $attack --momentum 0.9 \
-        --graph c5,1,1 --noniid 1 --agg "scp1" --identifier "exp"
+        python optimization_delta_complete.py ${COMMON} -n 11 -f 0 --attack $attack --momentum 0.9 \
+        --graph c5,0,1 --noniid 1 --agg "scp1" --identifier "exp"
         #&
         #pids[$!]=$!
     done
@@ -27,8 +27,8 @@ function optimization_delta {
 
 function optimization_delta_plot {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
-    python optimization_delta_complete.py ${COMMON} -n 12 -f 1 --attack "BF" --momentum 0.9 \
-    --graph c5,1,0 --noniid 1 --agg "scp1" --identifier "exp" \
+    python optimization_delta_complete.py ${COMMON} -n 11 -f 0 --attack "BF" --momentum 0.9 \
+    --graph c5,0,0 --noniid 1 --agg "scp1" --identifier "exp" \
     --analyze
 }
 
