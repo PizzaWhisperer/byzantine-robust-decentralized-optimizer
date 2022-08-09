@@ -30,7 +30,7 @@ def get_graph(args):
         m, b, delta = args.graph[len("c"):].split(",")
         m, b, delta = int(m), int(b), float(delta)
         assert args.n == 2 * m + 1 + b
-        return gu.Complete(n)
+        return gu.Complete(args.n)
 
     return gu.get_graph(args)
 
