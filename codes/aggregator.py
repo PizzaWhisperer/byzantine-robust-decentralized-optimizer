@@ -527,6 +527,55 @@ class DeClipping(Clipping):
         return super().__call__(inputs)
 
 
+# ---------------------------------------------------------------------------- #
+#                    Added Method: ChocoSGD                  #
+# ---------------------------------------------------------------------------- #
+
+def bucketing(inputs):
+    import numpy as np
+    s = 2
+    indices = list(range(len(inputs)))
+    np.random.shuffle(indices)
+    T = int(np.ceil(len(inputs) / s))
+
+    reshuffled_inputs = []
+    for t in range(T):
+        indices_slice = indices[t * s: (t + 1) * s]
+        g_bar = sum(inputs[i] for i in indices_slice) / len(indices_slice)
+        reshuffled_inputs.append(g_bar)
+    return reshuffled_inputs
+
+
+class ChocoSGD(DecentralizedAggregator):
+    # TODO: ChocoSGD
+    def __init__(self, node, weights, tau, worker):
+        self.tau = tau
+        self.worker = worker
+        super().__init__(node, weights)
+        self.logger = logging.getLogger("debug")
+
+    def _agg(self, local_inputs, neighbor_inputs):
+
+        zs = [
+            local_inputs + clip(neighbor - local_inputs, tau)
+            for neighbor in neighbor_inputs
+        ]
+        return super().__call__(local_inputs, zs)
+
+    def __call__(self, local_inputs, neighbor_inputs):
+        if self.tau is not None:
+            return self._agg(local_inputs, neighbor_inputs, self.tau)
+
+        distances = [(n - local_inputs).norm() for n in neighbor_inputs]
+
+        return self._agg(local_inputs, neighbor_inputs)
+
+    def __str__(self):
+        return "SelfCenteredClipping (tau={})".format(self.tau)
+
+
+
+
 def get_aggregator(args, graph, rank, worker):
     if args.agg in ["avg", "mean"]:
         return Mean() if args.graph is None else DeMean()
@@ -569,5 +618,10 @@ def get_aggregator(args, graph, rank, worker):
         else:
             tau = float(args.agg[3:])
         return SelfCenteredClipping(node, weights, tau, worker)
+
+    if args.agg.startswith("choco"):
+        node = graph.nodes[rank]
+        weights = graph.metropolis_weight[rank, :]
+        return ChocoSGD(node, weights, worker)
 
     raise NotImplementedError(f"{args.agg}")
