@@ -274,7 +274,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
 
         def loop_files():
             b = 0
-            delta = 1
+            delta = 0.25
             # for delta in [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 1]:
             # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
             #for attack in ["dissensus1.5"]:
