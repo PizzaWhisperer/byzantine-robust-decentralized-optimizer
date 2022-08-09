@@ -265,8 +265,8 @@ class OptimizationDeltaRunner(MNISTTemplate):
             #"dissensus1.5": "Dissensus",
             #"BF": "BF",
             #"echo": "Echo",
-            #"echo0": "Echo 0",
-            "sandtrap10": "SandTrap",
+            "echo10": "Echo 10",
+            #"sandtrap10": "SandTrap",
             #"stateoverride": "StateOverride",
 
 
@@ -279,7 +279,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
                 # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
                 #for attack in ["dissensus1.5"]:
                 #for attack in ["echo", "echo0", "sandtrap0", "stateoverride"]:
-                for attack in ["sandtrap10"]:
+                for attack in ["echo10"]:
                     log_dir = self.LOG_DIR_PATTERN.format(
                         script=sys.argv[0][:-3],
                         exp_id=self.args.identifier,
