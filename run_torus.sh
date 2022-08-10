@@ -4,30 +4,30 @@
 
 function optimization_delta {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
-    #for delta in 0 0.25 0.5 0.75 1
-  #  do
+    for delta in 0 0.25 0.5 0.75 1
+    do
         #for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
         #for attack in "echo" "echo10" "sandtrap10" "stateoverride"
 
-    for attack in "stateoverride"
-    do
-        python optimization_delta_complete.py ${COMMON} -n 16 -f 1 --attack $attack --momentum 0.9 \
-        --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp"
-        #&
-        #pids[$!]=$!
-    done
+        for attack in "stateoverride"
+        do
+            python optimization_delta.py ${COMMON} -n 16 -f 1 --attack $attack --momentum 0.9 \
+            --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp"
+            #&
+            #pids[$!]=$!
+        done
 
         # wait for all pids
         #for pid in ${pids[*]}; do
         #    wait $pid
         #done
         #unset pids
-    #done
+    done
 }
 
 function optimization_delta_plot {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
-    python optimization_delta_complete.py ${COMMON} -n 16 -f 1 --attack "BF" --momentum 0.9 \
+    python optimization_delta.py ${COMMON} -n 16 -f 1 --attack "BF" --momentum 0.9 \
     --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp" \
     --analyze
 }
@@ -40,7 +40,7 @@ function honest_majority {
       do
         #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
         python honest_majority.py ${COMMON} -n 16 -f 11 --attack ${attack} --momentum 0.9 \
-        --graph c5,1,0 --noniid 0 --agg ${agg} --identifier "exp"
+        --graph mr5,1,0 --noniid 0 --agg ${agg} --identifier "exp"
         #&pids[$!]=$!
       done
     done
@@ -57,7 +57,7 @@ function honest_majority {
       do
         #for attack in "ALIE10" "IPM" "dissensus1.5" "echo" "echo0" "sandtrap0" "stateoverride"
         python honest_majority.py ${COMMON} -n 15 -f 10 --attack ${attack} --momentum 0.9 \
-        --graph c5,1,1 --noniid 0 --agg ${agg} --identifier "exp" #&
+        --graph mr5,1,1 --noniid 0 --agg ${agg} --identifier "exp" #&
         #pids[$!]=$!
       done
     done
@@ -75,7 +75,7 @@ function honest_majority_plot {
     # python honest_majority.py ${COMMON} -n 16 -f 11 --attack "LF" --momentum 0.9 \
     # --graph mr5,1,0 --noniid 0 --agg "scp1" --identifier "honest_majority" --analyze
     python honest_majority.py ${COMMON} -n 15 -f 10 --attack "NA" --momentum 0.9 \
-    --graph c5,1,1 --noniid 0 --agg "scp1" --identifier "exp" --analyze
+    --graph mr5,1,1 --noniid 0 --agg "scp1" --identifier "exp" --analyze
 }
 
 function dumbbell {

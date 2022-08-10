@@ -1,5 +1,7 @@
 import numpy as np
 
+import networkx as nx
+import networkx.algorithms.bipartite as bi
 
 class Node(object):
     def __init__(self, index):
@@ -68,6 +70,14 @@ class Graph(object):
             else:
                 self.spectral_gap = 1
 
+class Social(Graph):
+    G = nx.davis_southern_women_graph()
+    def __init__(self, n):
+        edges = [(i, i + 1) for i in range(n - 1)] + [(n - 1, 0)]
+        super().__init__(n, edges)
+
+    def __str__(self):
+        return f"Social Graph(n={self.n})"
 
 class Ring(Graph):
     def __init__(self, n):
@@ -190,7 +200,7 @@ class TwoCliquesWithByzantine(Graph):
     - There are `b` Byzantine nodes connected to node 2m: namely, 2m+1, ..., 2m+b
 
     Mixing matrix:
-        - When there is no Byzantine worker (b=0), we use metropolis weighting 
+        - When there is no Byzantine worker (b=0), we use metropolis weighting
             - node 2m: gives weight 1/(m+1) to node 0 and node 2m separately and (m-1)/(m+1) to self (here we assume m-1 \ge 2)
         - Assuming that `b` + 2 <= m, then
             - all other weights not related to node 2m remain the same (as if there is no byz)
