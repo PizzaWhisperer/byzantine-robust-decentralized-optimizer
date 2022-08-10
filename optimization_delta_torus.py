@@ -66,6 +66,55 @@ def log_global_consensus_distance(trainer, E, B):
 
         lg.info("\n")
 
+def log_clique_consensus_distance(trainer, E, B):
+    """Log the consensus distance among all good workers."""
+    if B % LOG_CONSENSUS_DISTANCE_INTERVAL == 0:
+        lg = trainer.debug_logger
+        jlg = trainer.json_logger
+        lg.info(f"\n=== Log clique consensus distance @ E{E}B{B} ===")
+
+        counter = 0
+        for w in trainer.workers:
+            if not isinstance(w, ByzantineWorker):
+                counter += 1
+        clique_size = (counter - 1) // 2
+        assert counter == clique_size * 2 + 1, (clique_size, counter)
+
+        mean1, mean2, c = 0, 0, 0
+        for w in trainer.workers:
+            if not isinstance(w, ByzantineWorker):
+                if c < clique_size:
+                    mean1 += w.running["aggregated_model"]
+                elif c < 2 * clique_size:
+                    mean2 += w.running["aggregated_model"]
+                c += 1
+        mean1 /= clique_size
+        mean2 /= clique_size
+
+        cd1, cd2, c = 0, 0, 0
+        for w in trainer.workers:
+            if not isinstance(w, ByzantineWorker):
+                if c < clique_size:
+                    cd1 += (w.running["aggregated_model"] - mean1).norm() ** 2
+                elif c < 2 * clique_size:
+                    cd2 += (w.running["aggregated_model"] - mean1).norm() ** 2
+                c += 1
+        cd1 /= clique_size
+        cd2 /= clique_size
+
+        lg.info(f"clique1_consensus_distance={cd1:.3f}")
+        lg.info(f"clique2_consensus_distance={cd2:.3f}")
+        jlg.info(
+            {
+                "_meta": {"type": "clique_consensus_distance"},
+                "E": E,
+                "B": B,
+                "clique1": cd1.item(),
+                "clique2": cd2.item(),
+            }
+        )
+
+        lg.info("\n")
 
 def log_mixing_matrix(trainer, E, B):
     """Log the consensus distance among all good workers."""
@@ -101,7 +150,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             post_batch_hooks=[
                 check_noniid_hooks,
                 log_global_consensus_distance,
-                None,
+                log_clique_consensus_distance,
                 log_mixing_matrix,
             ],
             max_batches_per_epoch=args.max_batch_size_per_epoch,

@@ -10,7 +10,7 @@ function optimization_delta {
     do
       for f in 1
       do
-        python optimization_delta_torus.py ${COMMON} -n 16 -f ${f} --attack $attack --momentum 0.9 \
+        python optimization_delta_torus.py ${COMMON} -n 16 -f $f --attack $attack --momentum 0.9 \
         --graph torusC4C4 --noniid 1 --agg "scp1" --identifier "exp"
         #&
         #pids[$!]=$!
