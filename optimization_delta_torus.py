@@ -25,13 +25,6 @@ LOG_CONSENSUS_DISTANCE_INTERVAL = 10
 
 
 def get_graph(args):
-    # if args.graph.startswith("torus"):
-    #     # Pattern: twocliques2,1 for n=2 m=1
-    #     c1, c2 = args.graph[len("torus"):].split("C")
-    #     c1, c2 = int(c1), int(c2)
-    #     #assert args.n == n1 * n2 + b
-    #     return gu.Torus(args.n, c1, c2)
-
     return gu.get_graph(args)
 
 
@@ -74,57 +67,6 @@ def log_global_consensus_distance(trainer, E, B):
         lg.info("\n")
 
 
-def log_clique_consensus_distance(trainer, E, B):
-    """Log the consensus distance among all good workers."""
-    if B % LOG_CONSENSUS_DISTANCE_INTERVAL == 0:
-        lg = trainer.debug_logger
-        jlg = trainer.json_logger
-        lg.info(f"\n=== Log clique consensus distance @ E{E}B{B} ===")
-
-        counter = 0
-        for w in trainer.workers:
-            if not isinstance(w, ByzantineWorker):
-                counter += 1
-        clique_size = (counter - 1) // 2
-        assert counter == clique_size * 2 + 1, (clique_size, counter)
-
-        mean1, mean2, c = 0, 0, 0
-        for w in trainer.workers:
-            if not isinstance(w, ByzantineWorker):
-                if c < clique_size:
-                    mean1 += w.running["aggregated_model"]
-                elif c < 2 * clique_size:
-                    mean2 += w.running["aggregated_model"]
-                c += 1
-        mean1 /= clique_size
-        mean2 /= clique_size
-
-        cd1, cd2, c = 0, 0, 0
-        for w in trainer.workers:
-            if not isinstance(w, ByzantineWorker):
-                if c < clique_size:
-                    cd1 += (w.running["aggregated_model"] - mean1).norm() ** 2
-                elif c < 2 * clique_size:
-                    cd2 += (w.running["aggregated_model"] - mean1).norm() ** 2
-                c += 1
-        cd1 /= clique_size
-        cd2 /= clique_size
-
-        lg.info(f"clique1_consensus_distance={cd1:.3f}")
-        lg.info(f"clique2_consensus_distance={cd2:.3f}")
-        jlg.info(
-            {
-                "_meta": {"type": "clique_consensus_distance"},
-                "E": E,
-                "B": B,
-                "clique1": cd1.item(),
-                "clique2": cd2.item(),
-            }
-        )
-
-        lg.info("\n")
-
-
 def log_mixing_matrix(trainer, E, B):
     """Log the consensus distance among all good workers."""
     if E == 1 and B == 0:
@@ -159,7 +101,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             post_batch_hooks=[
                 check_noniid_hooks,
                 log_global_consensus_distance,
-                log_clique_consensus_distance,
+                None,
                 log_mixing_matrix,
             ],
             max_batches_per_epoch=args.max_batch_size_per_epoch,
@@ -191,7 +133,6 @@ class OptimizationDeltaRunner(MNISTTemplate):
         ),
         evaluators_fn=lambda args, task, trainer, test_loader, device: [
             AverageEvaluator(
-                # NOTE: as there is no Byzantine workers.
                 models=[
                     w.model
                     for w in trainer.workers
@@ -205,28 +146,6 @@ class OptimizationDeltaRunner(MNISTTemplate):
                 debug=args.debug,
                 meta={"type": "Global Average Validation Accuracy"},
             ),
-            # NOTE: evaluate the average accuracy inside clique 1
-            # AverageEvaluator(
-            #     models=[trainer.workers[i].model for i in trainer.graph.clique1()],
-            #     data_loader=test_loader,
-            #     loss_func=task.loss_func(device),
-            #     device=device,
-            #     metrics=task.metrics(),
-            #     use_cuda=args.use_cuda,
-            #     debug=args.debug,
-            #     meta={"type": "Clique1 Average Validation Accuracy"},
-            # ),
-            # # NOTE: evaluate the average accuracy inside clique 2
-            # AverageEvaluator(
-            #     models=[trainer.workers[i].model for i in trainer.graph.clique2()],
-            #     data_loader=test_loader,
-            #     loss_func=task.loss_func(device),
-            #     device=device,
-            #     metrics=task.metrics(),
-            #     use_cuda=args.use_cuda,
-            #     debug=args.debug,
-            #     meta={"type": "Clique2 Average Validation Accuracy"},
-            # ),
         ],
     ):
         super().__init__(
@@ -314,29 +233,6 @@ class OptimizationDeltaRunner(MNISTTemplate):
             except Exception as e:
                 raise NotImplementedError(
                     f"attack={attack} b={b}")
-
-            # Extract results for local accuracy
-            # for clique_id, clique_name in [(1, 'A'), (2, 'B')]:
-            #     try:
-            #         values = filter_entries_from_json(
-            #             path, kw=f"Clique{clique_id} Average Validation Accuracy"
-            #         )
-            #         for v in values:
-            #             it = (v["E"] - 1) * self.args.max_batch_size_per_epoch
-            #             acc_results.append(
-            #                 {
-            #                     "Iterations": it,
-            #                     "Accuracy (%)": v["top1"],
-            #                     r"$\delta_{\max}$": str(delta * b / (b + 3)),
-            #                     "ATK": mapping_attack[attack],
-            #                     "b": b,
-            #                     "Group": f"Clique {clique_name}",
-            #                 }
-            #             )
-            #     except Exception as e:
-            #         raise NotImplementedError(
-            #             f"clique_id={clique_id} attack={attack} b={b} delta={delta}"
-            #         )
 
         acc_df = pd.DataFrame(acc_results)
         acc_df.to_csv(out_dir + "/acc.csv", index=None)

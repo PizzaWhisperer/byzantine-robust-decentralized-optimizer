@@ -181,7 +181,7 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
 
     def pre_aggr(self, epoch, batch):
         self._initialize_target()
-    
+
         if isinstance(self.tagg, DecentralizedAggregator):
             self.running["flattened_models"] = self._attack_decentralized_aggregator()
         else:
@@ -465,7 +465,8 @@ def get_attackers(
         target = None
         if len(args.attack) > len("echo"):
             targeted = True
-            target = int(args.attack[len("echo") :])
+            if int(args.attack[len("echo") :] != -1:
+                target = int(args.attack[len("echo") :])
         attacker = EchoNoClipWorker(
             targeted=targeted,
             target=target,
