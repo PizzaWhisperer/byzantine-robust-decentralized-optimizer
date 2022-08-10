@@ -83,7 +83,7 @@ def log_clique_consensus_distance(trainer, E, B):
             if not isinstance(w, ByzantineWorker):
                 counter += 1
         clique_size = (counter - 1) // 2
-        assert counter == clique_size * 2 + 1, (clique_size, counter)
+        #assert counter == clique_size * 2 + 1, (clique_size, counter)
 
         mean1, mean2, c = 0, 0, 0
         for w in trainer.workers:
