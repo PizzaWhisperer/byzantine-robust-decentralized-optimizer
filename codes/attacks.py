@@ -432,7 +432,7 @@ def get_attackers(
         return attacker
 
     if args.attack.startswith("sandtrap"):
-        target = Nonde
+        target = None
         if len(args.attack) > len("sandtrap"):
             target = int(args.attack[len("sandtrap") :])
         attacker = SandTrapNoClipWorker(

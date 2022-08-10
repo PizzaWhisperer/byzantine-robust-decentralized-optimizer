@@ -6,9 +6,9 @@ function optimization_delta {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
     #for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
     #for attack in "echo" "echo10" "sandtrap10" "stateoverride"
-    for attack in "echo" "echo-1" "sandtrap" "stateoverride"
+    for attack in "sandtrap"
     do
-      for f in 1 0
+      for f in 1 
       do
         python optimization_delta_torus.py ${COMMON} -n 16 -f $f --attack $attack --momentum 0.9 \
         --graph torusC4C4 --noniid 1 --agg "scp1" --identifier "exp"
