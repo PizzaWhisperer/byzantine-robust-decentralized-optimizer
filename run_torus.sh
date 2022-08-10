@@ -8,7 +8,7 @@ function optimization_delta {
     #for attack in "echo" "echo10" "sandtrap10" "stateoverride"
     for attack in "stateoverride"
     do
-        python optimization_delta.py ${COMMON} -n 16 -f 1 --attack $attack --momentum 0.9 \
+        python optimization_delta_torus.py ${COMMON} -n 16 -f 1 --attack $attack --momentum 0.9 \
         --graph torusC4C4 --noniid 1 --agg "scp1" --identifier "exp"
         #&
         #pids[$!]=$!
@@ -24,7 +24,7 @@ function optimization_delta {
 
 function optimization_delta_plot {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
-    python optimization_delta.py ${COMMON} -n 16 -f 1 --attack "BF" --momentum 0.9 \
+    python optimization_delta_torus.py ${COMMON} -n 16 -f 1 --attack "BF" --momentum 0.9 \
     --graph torusC4C4 --noniid 1 --agg "scp1" --identifier "exp" \
     --analyze
 }
