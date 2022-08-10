@@ -243,7 +243,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
             #for attack in ["dissensus1.5"]:
             #for attack in ["echo", "echo0", "sandtrap0", "stateoverride"]:
-            for attack in ["echo-1"]:
+            for attack in ["echo-1", "echo", "sandtrap", "stateoverride"]:
                 for f in [1, 0]:
                     log_dir = self.LOG_DIR_PATTERN.format(
                         script=sys.argv[0][:-3],
@@ -276,8 +276,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
                             "Accuracy (%)": v["top1"],
                             #r"$\delta_{\max}$": str(delta * b / (b + 3)),
                             "ATK": mapping_attack[attack],
-                            "b": f,
-                            "Group": "All",
+                            "b": f
                         }
                     )
             except Exception as e:
@@ -298,8 +297,8 @@ class OptimizationDeltaRunner(MNISTTemplate):
             data=acc_df,
             x="Iterations",
             y="Accuracy (%)",
-            hue="b",
-            style="Group",
+            hue='ATK',
+            style="b",
             ax=axes[0],
         )
         g.set(xlim=(0, 1500))
@@ -319,12 +318,12 @@ class OptimizationDeltaRunner(MNISTTemplate):
 
         last_iterate = acc_df[acc_df['Iterations'] == 1470]
         g = sns.lineplot(
-            data=last_iterate,
-            x=0,
-            y="Accuracy (%)",
-            style="Group",
+            data=acc_df,
+            x="Iterations",
+            y=0,
             ax=axes[1],
             hue='ATK',
+            style="b",
             palette=['black']
         )
         g.set(xlim=(0, 0.25))
@@ -335,7 +334,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
         for i in range(2):
             axes[i].tick_params(axis='both', which='major', pad=-4)
         axes[0].set_ylabel('Accuracy (%)', labelpad=0)
-        axes[1].set_ylabel('', labelpad=-1)
+        axes[1].set_ylabel('Tau', labelpad=-1)
 
         fig.subplots_adjust(wspace=0.093)
 
