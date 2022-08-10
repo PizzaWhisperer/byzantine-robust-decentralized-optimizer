@@ -25,12 +25,12 @@ LOG_CONSENSUS_DISTANCE_INTERVAL = 10
 
 
 def get_graph(args):
-    if args.graph.startswith("torus"):
-        # Pattern: twocliques2,1 for n=2 m=1
-        c1, c2 = args.graph[len("torus"):].split("C")
-        c1, c2 = int(c1), int(c2)
-        #assert args.n == n1 * n2 + b
-        return gu.Torus(args.n, c1, c2)
+    # if args.graph.startswith("torus"):
+    #     # Pattern: twocliques2,1 for n=2 m=1
+    #     c1, c2 = args.graph[len("torus"):].split("C")
+    #     c1, c2 = int(c1), int(c2)
+    #     #assert args.n == n1 * n2 + b
+    #     return gu.Torus(args.n, c1, c2)
 
     return gu.get_graph(args)
 
