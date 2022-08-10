@@ -547,7 +547,6 @@ class DecentralizedTrainer(_SimulatorBase):
 
     def _log_train(self, progress, batch_idx, epoch, results):
         length = sum(res["length"] for res in results)
-        print("resssssss", results[0])
 
         r = {
             "_meta": {"type": "train"},

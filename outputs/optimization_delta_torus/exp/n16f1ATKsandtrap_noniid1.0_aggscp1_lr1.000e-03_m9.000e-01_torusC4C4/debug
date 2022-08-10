@@ -1,0 +1,17 @@
+
+=== Start adding workers ===
+=> Add worker SGDMWorker(index=0, momentum=0.9)
+=> Add worker SGDMWorker(index=1, momentum=0.9)
+=> Add worker SGDMWorker(index=2, momentum=0.9)
+=> Add worker SGDMWorker(index=3, momentum=0.9)
+=> Add worker SGDMWorker(index=4, momentum=0.9)
+=> Add worker SGDMWorker(index=5, momentum=0.9)
+=> Add worker SGDMWorker(index=6, momentum=0.9)
+=> Add worker SGDMWorker(index=7, momentum=0.9)
+=> Add worker SGDMWorker(index=8, momentum=0.9)
+=> Add worker SGDMWorker(index=9, momentum=0.9)
+=> Add worker SGDMWorker(index=10, momentum=0.9)
+=> Add worker SGDMWorker(index=11, momentum=0.9)
+=> Add worker SGDMWorker(index=12, momentum=0.9)
+=> Add worker SGDMWorker(index=13, momentum=0.9)
+=> Add worker SGDMWorker(index=14, momentum=0.9)
