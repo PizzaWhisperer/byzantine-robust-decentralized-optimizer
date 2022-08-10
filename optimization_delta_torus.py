@@ -324,7 +324,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             ax=axes[1],
             hue='ATK',
             style="b",
-            palette=['black']
+            #palette=['black']
         )
         g.set(xlim=(0, 0.25))
         axes[1].legend(handles[6:], labels[6:], ncol=1, loc='upper right',

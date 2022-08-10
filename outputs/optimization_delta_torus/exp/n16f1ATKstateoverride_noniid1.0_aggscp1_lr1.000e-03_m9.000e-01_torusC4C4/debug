@@ -18,7 +18,7 @@
 => Add worker ByzantineWorker(index=15)
 
 === Start adding graph ===
-<codes.graph_utils.TorusGraph object at 0x7f4b25946400>
+<codes.graph_utils.TorusGraph object at 0x7f5257a45cd0>
 
 Train epoch 1
 [E 1B0  |    512/60000 (  1%) ] Loss: 2.3115 top1=  6.6667
