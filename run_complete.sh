@@ -14,7 +14,7 @@ function optimization_delta {
         for f in 0 1
         do
           python optimization_delta_complete.py ${COMMON} -n 16 -f $f --attack $attack --momentum 0.9 \
-          --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp"
+          --graph c16 --noniid 1 --agg "scp1" --identifier "exp"
         #&
         #pids[$!]=$!
         done
@@ -31,7 +31,7 @@ function optimization_delta {
 function optimization_delta_plot {
     COMMON="--lr 1e-3 --use-cuda --epochs 50 --batch-size 32 --max-batch-size-per-epoch 30"
     python optimization_delta_complete.py ${COMMON} -n 16 -f 1 --attack "BF" --momentum 0.9 \
-    --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp" \
+    --graph c16 --noniid 1 --agg "scp1" --identifier "exp" \
     --analyze
 }
 
