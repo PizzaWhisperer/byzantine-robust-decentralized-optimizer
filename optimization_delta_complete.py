@@ -27,10 +27,6 @@ LOG_CONSENSUS_DISTANCE_INTERVAL = 10
 def get_graph(args):
     if args.graph.startswith("c"):
         # Pattern: twocliques2,1 for n=2 m=1
-        m, b, delta = args.graph[len("c"):].split(",")
-        m, b, delta = int(m), int(b), float(delta)
-        print(args.n, m)
-        assert args.n == 2 * m + 1 + b
         return gu.Complete(args.n)
 
     return gu.get_graph(args)
@@ -273,31 +269,30 @@ class OptimizationDeltaRunner(MNISTTemplate):
         }
 
         def loop_files():
-            b = 1
-            delta = 0.25
             # for delta in [0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 1]:
             # for attack in ["LF", "BF", "ALIE10", "IPM", "dissensus1.5"]:
             #for attack in ["dissensus1.5"]:
             #for attack in ["echo", "echo0", "sandtrap0", "stateoverride"]:
-            for attack in ["stateoverride"]:
-                log_dir = self.LOG_DIR_PATTERN.format(
-                    script=sys.argv[0][:-3],
-                    exp_id=self.args.identifier,
-                    n=11 + b,
-                    f=b,
-                    attack=attack,
-                    noniid=1.0,
-                    agg="scp1",
-                    lr=1e-3,
-                    momentum=0.9,
-                    graph=f"c5,1,{delta}",
-                )
-                path = log_dir + "stats"
-                yield b, delta, attack, path
+            for attack in ["echo-1", "echo", "sandtrap", "stateoverride"]:
+                for f in [0, 1]:
+                    log_dir = self.LOG_DIR_PATTERN.format(
+                        script=sys.argv[0][:-3],
+                        exp_id=self.args.identifier,
+                        n=11 + f,
+                        f=f,
+                        attack=attack,
+                        noniid=1.0,
+                        agg="scp1",
+                        lr=1e-3,
+                        momentum=0.9,
+                        graph=f"c5,1",
+                    )
+                    path = log_dir + "stats"
+                    yield f, attack, path
 
         # Plot for accuracy
         acc_results = []
-        for b, delta, attack, path in loop_files():
+        for f, attack, path in loop_files():
             # Add global accuracies
             try:
                 values = filter_entries_from_json(
@@ -309,15 +304,13 @@ class OptimizationDeltaRunner(MNISTTemplate):
                         {
                             "Iterations": it,
                             "Accuracy (%)": v["top1"],
-                            r"$\delta_{\max}$": str(delta * b / (b + 3)),
                             "ATK": mapping_attack[attack],
-                            "b": b,
-                            "Group": "All",
+                            "b": f,
                         }
                     )
             except Exception as e:
                 raise NotImplementedError(
-                    f"attack={attack} b={b} delta={delta}")
+                    f"attack={attack} b={f}")
 
             # Extract results for local accuracy
             # for clique_id, clique_name in [(1, 'A'), (2, 'B')]:
@@ -345,9 +338,6 @@ class OptimizationDeltaRunner(MNISTTemplate):
         acc_df = pd.DataFrame(acc_results)
         acc_df.to_csv(out_dir + "/acc.csv", index=None)
 
-        acc_df[r"$\delta_{\max}$ "] = acc_df[r"$\delta_{\max}$"].apply(
-            lambda x: float(x))
-
         plt.rcParams["font.family"] = "Times New Roman"
         sns.set(rc={'figure.figsize': (6, 6.75 / 3)})
         sns.set(font_scale=1)
@@ -357,7 +347,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             data=acc_df,
             x="Iterations",
             y="Accuracy (%)",
-            hue=r"$\delta_{\max}$",
+            hue="ATK",
             style="Group",
             ax=axes[0],
         )
@@ -379,12 +369,12 @@ class OptimizationDeltaRunner(MNISTTemplate):
         last_iterate = acc_df[acc_df['Iterations'] == 1470]
         g = sns.lineplot(
             data=last_iterate,
-            x=r"$\delta_{\max}$ ",
-            y="Accuracy (%)",
+            x="Iterations",
+            y=0,
             style="Group",
             ax=axes[1],
             hue='ATK',
-            palette=['black']
+            #palette=['black']
         )
         g.set(xlim=(0, 0.25))
         axes[1].legend(handles[6:], labels[6:], ncol=1, loc='upper right',

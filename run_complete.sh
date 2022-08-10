@@ -9,12 +9,15 @@ function optimization_delta {
         #for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
         #for attack in "echo" "echo10" "sandtrap10" "stateoverride"
 
-    for attack in "stateoverride"
+    for attack in "stateoverride" "echo" "sandtrap" "echo-1"
     do
-        python optimization_delta_complete.py ${COMMON} -n 16 -f 1 --attack $attack --momentum 0.9 \
-        --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp"
+        for f in 0 1
+        do
+          python optimization_delta_complete.py ${COMMON} -n 16 -f $f --attack $attack --momentum 0.9 \
+          --graph torus4C4 --noniid 1 --agg "scp1" --identifier "exp"
         #&
         #pids[$!]=$!
+        done
     done
 
         # wait for all pids
