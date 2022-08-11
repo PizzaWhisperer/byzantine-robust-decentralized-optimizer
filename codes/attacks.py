@@ -191,7 +191,7 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
 
 
 class StateOverrideWorker(DecentralizedByzantineWorker):
-    def __init__(self, target_state, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.target_state = torch.zeros(1199882)
         # TODO: not hardcode this number
