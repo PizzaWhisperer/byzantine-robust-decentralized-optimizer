@@ -212,7 +212,7 @@ class StateOverrideWorker(DecentralizedByzantineWorker):
                     network_contrib += (tm + clip(ww.running["flattened_models"][w.index] - tm, tau)) * nw
 
             def f(x):
-               return abs(self.target_state - (network_contrib + (tm + clip(x - tm, tau)) * w.running["aggregator"].weights[self.index]))
+               return abs(self.target_state.cpu() - (network_contrib.cpu() + (tm.cpu() + clip(x - tm.cpu(), tau)) * w.running["aggregator"].weights[self.index]))
             x = minimize(f, (self.target_state - network_contrib).cpu(), options={'maxiter':10}).x[0]
             print(x)
             thetas[w.index] = x
