@@ -1,9 +1,10 @@
 import numpy as np
 import torch
 from scipy.stats import norm
+from scipy.optimize import minimize
 
 from codes.worker import ByzantineWorker, repeat_model
-from codes.aggregator import DecentralizedAggregator
+from codes.aggregator import DecentralizedAggregator, clip
 
 
 class DecentralizedByzantineWorker(ByzantineWorker):
@@ -192,10 +193,31 @@ class SandTrapNoClipWorker(DecentralizedByzantineWorker):
 class StateOverrideWorker(DecentralizedByzantineWorker):
     def __init__(self, target_state, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.target_state = target_state
+        self.target_state = torch.zeros(1199882)
+        # TODO: not hardcode this number
+        self.target_state = self.target_state.to(self.device)
 
     def _attack_decentralized_aggregator(self, mixing=None):
-        raise NotImplementedError
+        thetas = {}
+        for w in self.running["neighbor_workers"] + [self]:
+            network_contrib = 0
+            adv_scale = 0 #rescaling theta_i as the advs' weights are "lost"
+            tm = w.running["flattened_models"][w.index]
+            for ww in w.running["neighbor_workers"]:
+                nw = mixing or w.running["aggregator"].weights[ww.index]
+                if isinstance(ww, ByzantineWorker):
+                    adv_scale += nw
+                else:
+                    tau = w.running["aggregator"].tau
+                    network_contrib += (tm + clip(ww.running["flattened_models"][w.index] - tm, tau)) * nw
+
+            def f(x):
+               return abs(self.target_state - (network_contrib + (tm + clip(x - tm, tau)) * w.running["aggregator"].weights[self.index]))
+            x = minimize(f, self.target - network_contrib, options={'maxiter':10}).x[0]
+            print(x)
+            thetas[w.index] = x
+        return thetas
+
          # TODO: stuff with clipping
         "network_contrib += (v + clip(data[j-self.b][i] - v, tau))*m[j]\n",
         "def f(vv):\n",
@@ -218,8 +240,8 @@ class StateOverrideNoClipWorker(DecentralizedByzantineWorker):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.target_state = torch.zeros(1199882)
+        # TODO: not hardcode this number
         self.target_state = self.target_state.to(self.device)
-        print("target state", self.target_state)
 
     def _attack_decentralized_aggregator(self, mixing=None):
         thetas = {}
@@ -451,6 +473,19 @@ def get_attackers(
     if args.attack.startswith("stateoverride"):
         # TODO: what do we put as state? All 0 tensor flow?
         attacker = StateOverrideNoClipWorker(
+            simulator=trainer,
+            index=rank,
+            data_loader=loader,
+            model=model,
+            loss_func=loss_func,
+            device=device,
+            optimizer=opt,
+            lr_scheduler=lr_scheduler,
+        )
+        return attacker
+
+    if args.attack.startswith("scc_stateoverride"):
+        attacker = StateOverrideWorker(
             simulator=trainer,
             index=rank,
             data_loader=loader,
