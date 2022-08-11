@@ -8,7 +8,7 @@ function optimization_delta {
     do
         #for attack in "LF" "ALIE10" "IPM" "dissensus1.5" "BF" "echo" "echo0" "sandtrap0" "stateoverride"
         #for attack in "echo" "echo10" "sandtrap10" "stateoverride"
-        for attack in "echo-1", "echo", "sandtrap", "stateoverride"
+        for attack in "echo-1" "echo" "sandtrap" "stateoverride"
         do
           for f in 1
           do
