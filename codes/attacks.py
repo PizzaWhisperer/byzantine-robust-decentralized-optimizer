@@ -213,7 +213,7 @@ class StateOverrideWorker(DecentralizedByzantineWorker):
 
             def f(x):
                return abs(self.target_state - (network_contrib + (tm + clip(x - tm, tau)) * w.running["aggregator"].weights[self.index]))
-            x = minimize(f, self.target - network_contrib, options={'maxiter':10}).x[0]
+            x = minimize(f, self.target_state - network_contrib, options={'maxiter':10}).x[0]
             print(x)
             thetas[w.index] = x
         return thetas
