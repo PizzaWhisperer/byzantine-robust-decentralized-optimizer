@@ -264,8 +264,7 @@ class OptimizationDeltaRunner(MNISTTemplate):
             #"echo": "Echo",
             #"sandtrap10": "SandTrap",
             "stateoverride": "StateOverride",
-
-
+            "baseline": "Baseline",
         }
 
         def loop_files():
@@ -274,21 +273,38 @@ class OptimizationDeltaRunner(MNISTTemplate):
             #for attack in ["dissensus1.5"]:
             #for attack in ["echo", "echo0", "sandtrap0", "stateoverride"]:
             for attack in ["echo-1", "echo", "sandtrap", "stateoverride"]:
-                for f in [0, 1]:
-                    log_dir = self.LOG_DIR_PATTERN.format(
-                        script=sys.argv[0][:-3],
-                        exp_id=self.args.identifier,
-                        n=11 + f,
-                        f=f,
-                        attack=attack,
-                        noniid=1.0,
-                        agg="scp1",
-                        lr=1e-3,
-                        momentum=0.9,
-                        graph=f"c5,1",
-                    )
-                    path = log_dir + "stats"
-                    yield f, attack, path
+                f = 1
+                log_dir = self.LOG_DIR_PATTERN.format(
+                    script=sys.argv[0][:-3],
+                    exp_id=self.args.identifier,
+                    n=11 + f,
+                    f=f,
+                    attack=attack,
+                    noniid=1.0,
+                    agg="scp1",
+                    lr=1e-3,
+                    momentum=0.9,
+                    graph=f"c16",
+                )
+                path = log_dir + "stats"
+                yield f, attack, path
+
+            #baseline
+            f = 0
+            log_dir = self.LOG_DIR_PATTERN.format(
+                script=sys.argv[0][:-3],
+                exp_id=self.args.identifier,
+                n=12,
+                f=f,
+                attack=attack,
+                noniid=1.0,
+                agg="scp1",
+                lr=1e-3,
+                momentum=0.9,
+                graph=f"c16",
+            )
+            path = log_dir + "stats"
+            yield f, "baseline", path
 
         # Plot for accuracy
         acc_results = []
