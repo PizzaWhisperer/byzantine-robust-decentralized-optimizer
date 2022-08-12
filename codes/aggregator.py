@@ -531,47 +531,61 @@ class DeClipping(Clipping):
 #                    Added Method: ChocoSGD                  #
 # ---------------------------------------------------------------------------- #
 
-def bucketing(inputs):
-    import numpy as np
-    s = 2
-    indices = list(range(len(inputs)))
-    np.random.shuffle(indices)
-    T = int(np.ceil(len(inputs) / s))
+def qsgd_quantize(x, d, is_biased):
+    norm = np.sqrt(np.sum(np.square(x)))
+    level_float = d * np.abs(x) / norm
+    previous_level = np.floor(level_float)
+    is_next_level = np.random.rand(d*x.shape) < (level_float - previous_level)
+    new_level = previous_level + is_next_level
+    scale = 1
+    if is_biased:
+        n = len(x)
+        scale = 1. / (np.minimum(n / d ** 2, np.sqrt(n) / d) + 1.)
+    return scale * np.sign(x) * norm * new_level / d
 
-    reshuffled_inputs = []
-    for t in range(T):
-        indices_slice = indices[t * s: (t + 1) * s]
-        g_bar = sum(inputs[i] for i in indices_slice) / len(indices_slice)
-        reshuffled_inputs.append(g_bar)
-    return reshuffled_inputs
-
+def __quantize(xs, xs_hats, quantization):
+    if xs_hats != None:
+        xs = [x_ - x_hat for x_, x_hat in zip(xs, xs_hats)]
+    qs = []
+    for x in xs:
+        if quantization in ['qsgd-biased', 'qsgd-unbiased']:
+            is_biased = (quantization == 'qsgd-biased')
+            d = 4 #qsgd_d bits # TODO: the also experiment with 16 bits
+            qs.append(qsgd_quantize(x, d, is_biased))
+        else: #quantization == 'top':
+            k = int(x.shape//100) #keep 1% of coordinates
+            q = np.zeros_like(x)
+            indexes = np.argsort(np.abs(x))
+            q[indexes[:k]] = x[indexes[:k]]
+            qs.append(q)
+        return qs
 
 class ChocoSGD(DecentralizedAggregator):
     # TODO: ChocoSGD
-    def __init__(self, node, weights, tau, worker):
-        self.tau = tau
+    def __init__(self, node, weights, step, worker):
+        self.step = step
         self.worker = worker
+        self.x_hats = None
+        self.quantization = "top" #default
         super().__init__(node, weights)
         self.logger = logging.getLogger("debug")
 
-    def _agg(self, local_inputs, neighbor_inputs):
+    def _agg(self, local_input, neighbor_inputs):
+        qjs = _quantize(local_input + neighbor_inputs, self.x_hats, self.quantization)
+        if self.x_hats == None:
+            self.x_hats = qjs
+        else:
+            self.x_hats = [qj + xj_hat for qj, xj_hat in zip(qjs, self.x_hats)]
 
-        zs = [
-            local_inputs + clip(neighbor - local_inputs, tau)
-            for neighbor in neighbor_inputs
-        ]
-        return super().__call__(local_inputs, zs)
+        xi_hat = self.x_hats[0]
+        xj_hat_minus_xi_hat = [xj_hat - xi_hat for xj_hat in self.x_hats]
+        return local_input + self.step*super().__call__(xj_hat_minus_xi_hat[0], xj_hat_minus_xi_hat[1:])
 
     def __call__(self, local_inputs, neighbor_inputs):
-        if self.tau is not None:
-            return self._agg(local_inputs, neighbor_inputs, self.tau)
-
-        distances = [(n - local_inputs).norm() for n in neighbor_inputs]
-
         return self._agg(local_inputs, neighbor_inputs)
 
     def __str__(self):
-        return "SelfCenteredClipping (tau={})".format(self.tau)
+        return "ChocoSGD"
 
 
 
@@ -620,8 +634,11 @@ def get_aggregator(args, graph, rank, worker):
         return SelfCenteredClipping(node, weights, tau, worker)
 
     if args.agg.startswith("choco"):
+        step = 1
+        # TODO: try with other step size
+        quantization = args.agg[len("choco_"):]
         node = graph.nodes[rank]
         weights = graph.metropolis_weight[rank, :]
-        return ChocoSGD(node, weights, worker)
+        return ChocoSGD(node, weights, step, quantization, worker)
 
     raise NotImplementedError(f"{args.agg}")
